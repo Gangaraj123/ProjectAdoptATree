@@ -3,6 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mypackage.adoptatree">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,18 +28,35 @@
         android:theme="@style/Theme.AdoptATree"
         tools:targetApi="31">
         <activity
-            android:name=".EmailVerificationActivity"
-            android:exported="true" />
+            android:name=".Maintainance.Update_Activity"
+            android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".Maintainance.QRCodeScanner"
+            android:exported="false" />
+        <activity
+            android:name=".Maintainance.QRCodeGenerator"
+            android:exported="false" />
+        <activity
+            android:name=".Maintainance.Register_Tree"
+            android:exported="false" />
+        <activity
+            android:name=".Maintainance.Manager_Activity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".utilities.ImageViewr"
+            android:exported="false" />
+        <activity
+            android:name=".EmailVerificationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SignInActivity"
+            android:exported="true" />
         <activity
             android:name=".SignUpActivity"
             android:exported="true" />

@@ -30,7 +30,7 @@ class EmailVerificationActivity : AppCompatActivity() {
                     startActivity(Intent(this, MainActivity::class.java))
                 }
                 .addOnFailureListener {
-                    Log.d("onFailure", "Failed to send email!")
+                    Log.d(TAG, "Failed to send email!")
                 }
         }
 

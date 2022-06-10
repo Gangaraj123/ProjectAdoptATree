@@ -1,15 +1,13 @@
 package com.mypackage.adoptatree
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
 import com.mypackage.adoptatree.databinding.ActivityMainBinding
+
+// declare common strings here
+const val TAG="TAG_123" // used to Log while debugging
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,5 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         fb = FirebaseAuth.getInstance()
     }
+
 
 }

@@ -6,4 +6,119 @@
     android:layout_height="match_parent"
     tools:context=".Maintainance.QRCodeGenerator">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heading"
+        app:layout_constraintBottom_toTopOf="@+id/radio_grp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="40dp"
+        android:text="select"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radio_grp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkedButton="@id/radio_qr_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heading">
+
+        <RadioButton
+            android:id="@+id/radio_qr_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_qr_code_icon"
+            android:drawablePadding="5dp"
+            android:layoutDirection="rtl"
+            android:text="QR Code" />
+
+        <RadioButton
+            android:id="@+id/radio_bar_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_barcode_icon"
+            android:drawablePadding="5dp"
+            android:layoutDirection="rtl"
+            android:text="Bar Code"
+            android:textSize="14sp" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/QR_Code_View"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radio_grp">
+
+        <ImageView
+            android:id="@+id/generated_qr_code_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/qr_share_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/green_2"
+                android:text="share"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_baseline_share_24" />
+
+            <Button
+                android:id="@+id/qr_save_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/green_2"
+                android:text="save"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_baseline_save_image_24" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/qr_generate_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/green_2"
+        android:text="Generate"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radio_grp" />
+
+    <ProgressBar
+        android:id="@+id/qr_generating_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/ic_rotating_gear_icon"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radio_grp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
