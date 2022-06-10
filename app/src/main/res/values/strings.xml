@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">AdoptATree</string>
+    <string name="app_name">Adopt A Tree</string>
+    <string name="TAG">TAG_123</string>
 </resources>
