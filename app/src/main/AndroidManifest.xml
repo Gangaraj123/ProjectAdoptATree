@@ -28,8 +28,17 @@
         android:theme="@style/Theme.AdoptATree"
         tools:targetApi="31">
         <activity
-            android:name=".Maintainance.Update_Activity"
+            android:name=".Maintainance.Update.Update_Activity"
+            android:exported="false"
+            android:label="@string/title_activity_udate2"
+            android:theme="@style/Theme.AdoptATree.NoActionBar" />
+        <activity
+            android:name=".User.Tree_Images_Activity"
             android:exported="false" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Maintainance.QRCodeScanner"
             android:exported="false" />
@@ -49,7 +58,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".utilities.ImageViewr"
+            android:name=".utilities.ImageViewer"
             android:exported="false" />
         <activity
             android:name=".EmailVerificationActivity"

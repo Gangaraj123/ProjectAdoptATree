@@ -2,9 +2,7 @@ package com.mypackage.adoptatree.Maintainance
 
 import android.content.ContentValues
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
+import android.graphics.*
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -23,6 +21,7 @@ import com.mypackage.adoptatree.TAG
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
+import java.util.*
 
 
 class QRCodeGenerator : AppCompatActivity() {
@@ -51,7 +50,7 @@ class QRCodeGenerator : AppCompatActivity() {
         qr_select_radio_grp = findViewById(R.id.radio_grp)
 
         generate_btn.setOnClickListener {
-            val qr_string = "skdflksd"
+            val qr_string = getRandomKey()
             val selectedbtn = qr_select_radio_grp.checkedRadioButtonId
             generate_btn.visibility = View.GONE
             qr_generating_load.visibility = View.VISIBLE
@@ -78,7 +77,7 @@ class QRCodeGenerator : AppCompatActivity() {
         share_btn.setOnClickListener {
             if (current_QR_URI == null)
                 saveImage(curr_QR_Bitmap)
-
+            qr_already_saved = true
             try {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.putExtra(Intent.EXTRA_STREAM, current_QR_URI)
@@ -99,6 +98,10 @@ class QRCodeGenerator : AppCompatActivity() {
 
     }
 
+    private fun getRandomKey(): String {
+        return UUID.randomUUID().toString().substring(0, 15).replace('-', 'A')
+    }
+
     // returns QR code from string
     private fun getQRCode(text: String): Bitmap {
         val result = qrcodewriter.encode(text, BarcodeFormat.QR_CODE, 400, 400)
@@ -113,6 +116,16 @@ class QRCodeGenerator : AppCompatActivity() {
             }
         val resultbitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         resultbitmap.setPixels(pixels, 0, w, 0, 0, w, h)
+
+        // add the text
+        val canvas = Canvas(resultbitmap)
+        val paintText = Paint(Paint.ANTI_ALIAS_FLAG)
+        paintText.color = Color.BLACK
+        paintText.textSize = 25f
+        val rect = Rect()
+        paintText.getTextBounds(text, 0, text.length, rect)
+        canvas.drawText(text, 100f, h - 15f, paintText)
+
         return resultbitmap
     }
 
@@ -131,12 +144,22 @@ class QRCodeGenerator : AppCompatActivity() {
         val resultbitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         resultbitmap.setPixels(pixels, 0, w, 0, 0, w, h)
 
+
         // add some padding
-        val paddedbitmap = Bitmap.createBitmap(w + 10, h + 20, Bitmap.Config.ARGB_8888)
+        val paddedbitmap = Bitmap.createBitmap(w + 20, h + 50, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(paddedbitmap)
 
         canvas.drawARGB(Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE)
-        canvas.drawBitmap(resultbitmap, 5F, 10F, null)
+        canvas.drawBitmap(resultbitmap, 10F, 20F, null)
+
+        // add the text
+        val paintText = Paint(Paint.ANTI_ALIAS_FLAG)
+        paintText.color = Color.BLACK
+        paintText.textSize = 24f
+        val rect = Rect()
+        paintText.getTextBounds(text, 0, text.length, rect)
+        canvas.drawText(text, 100f, h + 45f, paintText)
+
         return paddedbitmap
     }
 
