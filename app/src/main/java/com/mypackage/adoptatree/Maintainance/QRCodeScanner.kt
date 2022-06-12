@@ -2,6 +2,7 @@ package com.mypackage.adoptatree.Maintainance
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
 import com.mypackage.adoptatree.R
+import com.mypackage.adoptatree.TAG
 
 // Class for implementing QR code scanner
 class QRCodeScanner : AppCompatActivity() {
@@ -22,7 +24,6 @@ class QRCodeScanner : AppCompatActivity() {
     private lateinit var scannerView: CodeScannerView   // scanner view from dependency
     private lateinit var codeScanner: CodeScanner            // scanner from dependency
     private val CAMERA_REQUEST_CODE = 23  // request for to ask camera permissions
-    private val TAG: String = "TAG_123"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +48,10 @@ class QRCodeScanner : AppCompatActivity() {
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {  // called on success
                 makeVibration()
-                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_SHORT).show()
+                val intent=Intent()
+                intent.putExtra("scan_result",it.text)
+                setResult(RESULT_OK,intent)
                 finish()
             }
         }
@@ -112,8 +116,8 @@ class QRCodeScanner : AppCompatActivity() {
         when (requestCode) {
             CAMERA_REQUEST_CODE -> {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Permission is required to scan !!", Toast.LENGTH_SHORT)
-                        .show()
+                    val intent=Intent()
+                    setResult(RESULT_CANCELED,intent)
                     finish() // Exit the activity
                 } else {
                     Log.d(TAG, "Permission granted by user")

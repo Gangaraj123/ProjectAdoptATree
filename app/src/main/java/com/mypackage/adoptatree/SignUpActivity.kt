@@ -56,7 +56,7 @@ class SignUpActivity : AppCompatActivity() {
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {
-                    Log.d("SignUpError!", "Cannot create account!")
+                    Log.d(TAG, "Cannot create account!")
                     Toast.makeText(
                         this, "Email already exists", Toast.LENGTH_SHORT
                     ).show()
