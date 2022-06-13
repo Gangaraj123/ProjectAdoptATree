@@ -76,6 +76,8 @@ class Register_Tree : AppCompatActivity() {
                 val data: Intent? = result.data
                 if (data != null) {
                     val qr_result = data.getStringExtra("scan_result")
+                    if(qr_result!=null && is_valid_firebase_path(qr_result))
+                    {
                     show_Loading()
                     // verify qr code here
                     //check if already a tree is present with this id
@@ -97,21 +99,15 @@ class Register_Tree : AppCompatActivity() {
                                             } else {
                                                 if (qr_result != null) {
                                                     Add_tree_in_database(qr_result)
-                                                }
-                                            }
-                                        }
-
-                                        override fun onCancelled(error: DatabaseError) {
-
-                                        }
-                                    })
-                                }
+                                                }}}
+                                        override fun onCancelled(error: DatabaseError) {}
+                                    })}
                             }
-
-                            override fun onCancelled(error: DatabaseError) {
-                            }
+                            override fun onCancelled(error: DatabaseError) {}
                         })
                 }
+                    else showErrorMessage()
+                    }
             }
         }
 
@@ -267,5 +263,15 @@ class Register_Tree : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun is_valid_firebase_path(str: String): Boolean {
+        if(str.isEmpty()) return false
+        val invalid_characters = listOf('.', '#', '[', ']', '$')
+        for (i in str) {
+            if (i in invalid_characters)
+                return false
+        }
+        return true
     }
 }

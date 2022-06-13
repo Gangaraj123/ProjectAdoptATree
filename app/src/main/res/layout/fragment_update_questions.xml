@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_scroll_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     tools:context=".Maintainance.Update.Update_Activity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="serif"
-        android:id="@+id/no_questions"
-        android:textSize="20sp"
-        android:visibility="gone"
-        android:textColor="@color/black"
-        android:text="No unanswered questions"
-        />
-    <androidx.recyclerview.widget.RecyclerView
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".Maintainance.Update.Update_Activity">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:id="@+id/uaq_recyclerview"
-        tools:listitem="@layout/unanswered_question_gardener"
-        />
-</FrameLayout>
+        android:layout_height="0dp"
+        android:layout_weight="100"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/uaq_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:itemCount="2"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/unanswered_question_gardener" />
+
+        <ProgressBar
+            android:id="@+id/questions_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="visible" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
+

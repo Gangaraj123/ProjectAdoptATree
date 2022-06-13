@@ -1,10 +1,9 @@
 package com.mypackage.adoptatree
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.mypackage.adoptatree.databinding.ActivityEmailVerificationBinding

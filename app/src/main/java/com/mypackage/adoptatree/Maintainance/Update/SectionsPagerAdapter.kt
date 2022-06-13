@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.google.firebase.database.core.utilities.Tree
 
 private val TAB_TITLES = arrayOf(
     "Questions",
@@ -12,10 +11,10 @@ private val TAB_TITLES = arrayOf(
 )
 
 
-class SectionsPagerAdapter(private val context: Context, fm: FragmentManager,val tree_id:String) :
+class SectionsPagerAdapter(private val context: Context, fm: FragmentManager, val tree_id: String) :
     FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
-        return if(position==0)
+        return if (position == 0)
             QuestionsFragment(tree_id)
         else
             ImageUploadFragment(tree_id)

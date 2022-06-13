@@ -22,17 +22,17 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>) :
     }
 
     override fun onBindViewHolder(holder: UAQ_VH, position: Int) {
-        holder.question_text.text = "Question number " + position.toString()
+        holder.question_text.text = questionList[position].question
 
         //recycler view recycles the views, so if this views display is changed when used before, reset it
-        
-        if(holder.answer_edit_text.visibility==View.VISIBLE)
-            holder.answer_edit_text.visibility=View.GONE
+
+        if (holder.answer_edit_text.visibility == View.VISIBLE)
+            holder.answer_edit_text.visibility = View.GONE
         holder.answer_edit_text.setText("")
-        if(holder.respond_btn.visibility!=View.VISIBLE)
-        holder.respond_btn.visibility=View.VISIBLE
-        if(holder.submit_btn.visibility==View.VISIBLE)
-            holder.submit_btn.visibility=View.GONE
+        if (holder.respond_btn.visibility != View.VISIBLE)
+            holder.respond_btn.visibility = View.VISIBLE
+        if (holder.submit_btn.visibility == View.VISIBLE)
+            holder.submit_btn.visibility = View.GONE
     }
 
     override fun getItemCount(): Int {

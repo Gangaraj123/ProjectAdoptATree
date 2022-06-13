@@ -10,7 +10,6 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -49,9 +48,9 @@ class QRCodeScanner : AppCompatActivity() {
             runOnUiThread {  // called on success
                 makeVibration()
 //                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_SHORT).show()
-                val intent=Intent()
-                intent.putExtra("scan_result",it.text)
-                setResult(RESULT_OK,intent)
+                val intent = Intent()
+                intent.putExtra("scan_result", it.text)
+                setResult(RESULT_OK, intent)
                 finish()
             }
         }
@@ -116,8 +115,8 @@ class QRCodeScanner : AppCompatActivity() {
         when (requestCode) {
             CAMERA_REQUEST_CODE -> {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    val intent=Intent()
-                    setResult(RESULT_CANCELED,intent)
+                    val intent = Intent()
+                    setResult(RESULT_CANCELED, intent)
                     finish() // Exit the activity
                 } else {
                     Log.d(TAG, "Permission granted by user")

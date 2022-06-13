@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "965247038261",
+    "firebase_url": "https://adoptatree-c8ad5-default-rtdb.firebaseio.com",
     "project_id": "adoptatree-c8ad5",
     "storage_bucket": "adoptatree-c8ad5.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "965247038261-6tin58nb6ih7e03b1colv2b1g252j96c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mypackage.adoptatree",
+            "certificate_hash": "0e189a2553926fde6da45f82fead7b6139f90627"
+          }
+        },
         {
           "client_id": "965247038261-qgleha1q57fcqurpi8q1l6eid1btfp1g.apps.googleusercontent.com",
           "client_type": 3

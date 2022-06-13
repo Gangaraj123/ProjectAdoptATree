@@ -22,10 +22,10 @@ class ImageViewer : AppCompatActivity() {
         // We need to pass imageUrl to this from intent
         val image_url = intent.getStringExtra("Image_url")
         val zoomable_img_view = findViewById<ImageView>(R.id.zoomable_image_view)
-        ImageManager.loadImageIntoView(zoomable_img_view,image_url)
+        ImageManager.loadImageIntoView(zoomable_img_view, image_url)
 
         // close when back button is pressed
-        findViewById<ImageButton>(R.id.back_btn).setOnClickListener{
+        findViewById<ImageButton>(R.id.back_btn).setOnClickListener {
             onBackPressed() // or finish()
         }
     }

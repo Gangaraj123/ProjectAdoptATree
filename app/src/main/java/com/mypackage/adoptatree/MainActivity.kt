@@ -12,11 +12,14 @@ const val Registered_trees = "Registered Trees" // trees that are registered and
 const val Adopted_trees = "Adopted Trees" // trees that are adopted
 const val Tree_details = "Tree details"  // child in a tree node that has tree details
 const val Tree_photos_list = "Tree Photos" // child that stores list of photos
-const val Tree_question_list_answered =  "Answered Tree Questions" // child that stores list of queries and answers for that tree
-const val Tree_question_list_unanswered =  "UnAnswered Tree Questions" // child that stores list of queries and answers for that tree
-const val Tree_qr_value="QR Value" // storing QR code value in tree node
-const val timestamp ="updated time" // for maintaining time of additions or updations
-const val Last_watered_time="last watered" // for maintaining last watered time
+const val Tree_question_list_answered =
+    "Answered Tree Questions" // child that stores list of queries and answers for that tree
+const val Tree_question_list_unanswered =
+    "UnAnswered Tree Questions" // child that stores list of queries and answers for that tree
+const val Tree_qr_value = "QR Value" // storing QR code value in tree node
+const val timestamp = "updated time" // for maintaining time of additions or updations
+const val Last_watered_time = "last watered" // for maintaining last watered time
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fb: FirebaseAuth
