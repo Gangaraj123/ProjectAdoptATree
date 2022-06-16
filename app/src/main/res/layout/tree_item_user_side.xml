@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="16dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="40dp"
+    app:cardBackgroundColor="@color/light_brown">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="serif"
+            android:text="Adopted On: "
+            android:textColor="@color/dark_brown"
+            app:layout_constraintEnd_toStartOf="@+id/adoptedOn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/adoptedOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="serif"
+            android:text="1/1/2022"
+            android:textColor="@color/dark_brown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/treeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="serif"
+            android:text="TREE NAME"
+            android:textColor="@color/dark_brown"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/lastWateredText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="serif"
+            android:text="Last Watered: "
+            android:textColor="@color/dark_brown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/treeName" />
+
+        <TextView
+            android:id="@+id/lastWatered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:text="1/1/2022"
+            android:textColor="@color/dark_brown"
+            app:layout_constraintStart_toEndOf="@+id/lastWateredText"
+            app:layout_constraintTop_toBottomOf="@+id/treeName" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/questions"
+            android:layout_width="0dp"
+            android:layout_height="30sp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/orange"
+            android:fontFamily="serif"
+            android:text="Questions"
+            android:textColor="@color/dark_brown"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lastWateredText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/images"
+            android:layout_width="0dp"
+            android:layout_height="30sp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@color/orange"
+            android:fontFamily="serif"
+            android:text="Images"
+            android:textColor="@color/dark_brown"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/questions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/questions" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

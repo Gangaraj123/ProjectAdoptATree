@@ -15,4 +15,7 @@
     <color name="gray_white">#DEE6E5</color>
     <color name="voilet">#5b3da4</color>
     <color name="edit_text_gray">#efefef</color>
+    <color name="dark_brown">#592202</color>
+    <color name="light_brown">#D9B991</color>
+    <color name="orange">#FFB443</color>
 </resources>

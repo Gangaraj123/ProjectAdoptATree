@@ -53,7 +53,7 @@ class SignUpActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     addToDatabase(name, email, mAuth.currentUser?.uid!!, isManager)
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, SignInActivity::class.java))
                     finish()
                 } else {
                     Log.d(TAG, "Cannot create account!")
