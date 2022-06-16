@@ -5,14 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.database.*
+import com.google.firebase.database.core.utilities.Tree
 import com.mypackage.adoptatree.*
 import com.mypackage.adoptatree.Maintainance.Update.Update_Activity
 import com.mypackage.adoptatree.R
@@ -128,11 +126,12 @@ class Manager_Activity : AppCompatActivity() {
         }
 
     private fun Update_watered_time(uid: String, isadopted: Boolean) {
+        val time = System.currentTimeMillis()
         var path = if (isadopted)
             Adopted_trees
         else Registered_trees
         mdbRef.child(Trees).child(path).child(uid)
-            .child(Last_watered_time).setValue(System.currentTimeMillis())
+            .child(Last_watered_time).setValue(time)
             .addOnSuccessListener {
                 verifying_layout.findViewById<LinearLayout>(R.id.qr_verify_load)
                     .visibility = View.GONE
@@ -140,5 +139,20 @@ class Manager_Activity : AppCompatActivity() {
                 success_btn.visibility = View.VISIBLE
 
             }
+
+        if(isadopted){
+            mdbRef.child(Trees).child(Adopted_trees).child(uid).child(Tree_details).child("adopted_by").addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val user_id = snapshot.value
+                    mdbRef.child("users").child(user_id as String).child(Adopted_trees).child(uid).child(
+                        Last_watered_time).setValue(time)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+        }
     }
 }

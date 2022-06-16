@@ -28,6 +28,27 @@
         android:theme="@style/Theme.AdoptATree"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityUserQA"
+            android:exported="true" >
+
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".User.AdoptedTreesActivity"
+            android:exported="true"
+            android:label="@string/title_activity_adopted_trees"
+            android:theme="@style/Theme.AdoptATree.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Maintainance.Update.Update_Activity"
             android:exported="false"
             android:label="@string/title_activity_udate2"
@@ -51,11 +72,13 @@
         <activity
             android:name=".Maintainance.Manager_Activity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".utilities.ImageViewer"

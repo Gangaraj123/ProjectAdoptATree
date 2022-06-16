@@ -3,6 +3,34 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.3625" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/drawable/ic_baseline_gear_icon.xml" value="0.3625" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/drawable/ic_register.xml" value="0.3625" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/drawable/roundedbutton.xml" value="0.2975" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_adopted_trees.xml" value="0.25" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_email_verification.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_image_viewr.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_main.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_manager.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_qrcode_generator.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_register_tree.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_sign_up.xml" value="0.11666666666666667" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_tree_images.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_update.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/activity_user_qa.xml" value="0.33" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/answered_questions_layout.xml" value="0.75" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/black_cursor.xml" value="0.34305555555555556" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/content_adopted_trees.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/fragment_image_upload.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/fragment_second.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/fragment_update_questions.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/row_add_item.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/tree_image_view.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/tree_item_user_side.xml" value="0.22" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/tree_item_usr_side.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/unanswered_question_gardener.xml" value="0.3439814814814815" />
+        <entry key="..\:/Development/App Development/TreeProject/app/src/main/res/layout/verifying_dialog_fragment.xml" value="0.3439814814814815" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1225" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_appicon.xml" value="0.1825" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_back_btn.xml" value="0.172" />

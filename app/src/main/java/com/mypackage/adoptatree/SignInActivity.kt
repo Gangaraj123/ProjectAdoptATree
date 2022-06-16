@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.mypackage.adoptatree.User.AdoptedTreesActivity
 import com.mypackage.adoptatree.databinding.ActivitySignInBinding
 import com.mypackage.adoptatree.databinding.ActivitySignUpBinding
 
@@ -26,7 +27,7 @@ class SignInActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         if (mAuth.uid != null) {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, AdoptedTreesActivity::class.java))
             finish()
         }
 
