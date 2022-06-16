@@ -195,6 +195,12 @@ class AdoptedTreesActivity : AppCompatActivity() {
                     intent.putExtra("id", it)
                     startActivity(intent)
                 }
+
+                treeAdapter.onQuestionsButtonClick = {
+                    val intent = Intent(this@AdoptedTreesActivity, ActivityUserQA::class.java)
+                    intent.putExtra("id", it)
+                    startActivity(intent)
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {

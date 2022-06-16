@@ -17,6 +17,7 @@ class AdoptedTreeAdapter(private val adoptedTreeList: List<AdoptedTreesActivity.
     RecyclerView.Adapter<AdoptedTreeAdapter.AdoptedTreeViewHolder>() {
 
     var onImagesButtonClick : ((String) -> Unit) ?= null
+    var onQuestionsButtonClick : ((String) -> Unit) ?= null
 
     class AdoptedTreeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nickname: TextView = itemView.findViewById(R.id.treeName)
@@ -24,6 +25,7 @@ class AdoptedTreeAdapter(private val adoptedTreeList: List<AdoptedTreesActivity.
         val lastWatered: TextView = itemView.findViewById(R.id.lastWatered)
         val lastWateredText : TextView = itemView.findViewById(R.id.lastWateredText)
         val imageButton : Button = itemView.findViewById(R.id.images)
+        val questionButton : Button = itemView.findViewById(R.id.questions)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdoptedTreeViewHolder {
@@ -47,6 +49,10 @@ class AdoptedTreeAdapter(private val adoptedTreeList: List<AdoptedTreesActivity.
 
         holder.imageButton.setOnClickListener{
             onImagesButtonClick?.invoke(adoptedTree.id!!)
+        }
+
+        holder.questionButton.setOnClickListener {
+            onQuestionsButtonClick?.invoke(adoptedTree.id!!)
         }
 
     }
