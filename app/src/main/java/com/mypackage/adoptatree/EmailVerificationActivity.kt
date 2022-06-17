@@ -1,8 +1,8 @@
 package com.mypackage.adoptatree
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -18,24 +18,22 @@ class EmailVerificationActivity : AppCompatActivity() {
 
         binding = ActivityEmailVerificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        fAuth = FirebaseAuth.getInstance()
+        val user: FirebaseUser = intent.extras?.get("user") as FirebaseUser
 
         binding.sendEmailButton.setOnClickListener {
-            val user: FirebaseUser = fAuth.currentUser ?: return@setOnClickListener
 
             user.sendEmailVerification()
                 .addOnSuccessListener {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    Toast.makeText(this, "Verification email sent", Toast.LENGTH_SHORT).show()
+                    binding.sendEmailButton.text = "Done"
+                    binding.sendEmailButton.setOnClickListener {
+                        finish()
+                    }
                 }
                 .addOnFailureListener {
                     Log.d(TAG, "Failed to send email!")
                 }
         }
 
-        binding.signUp.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
-            finish()
-        }
     }
 }

@@ -1,14 +1,12 @@
 package com.mypackage.adoptatree.Maintainance.Update
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.database.Cursor
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.provider.OpenableColumns
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +25,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.mypackage.adoptatree.*
 import com.yalantis.ucrop.UCrop
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.IOException
 import java.util.*
 
 
@@ -108,9 +108,14 @@ class ImageUploadFragment(val tree_id: String) : Fragment() {
                 view.findViewById<LinearProgressIndicator>(R.id.uploaded_progessbar)
             image_layout.visibility = View.GONE
             uploading_layout.visibility = View.VISIBLE
+            val scaleDivider=4
+           val final_bitmap=MediaStore.Images.Media.getBitmap(requireContext().contentResolver, current_image_url)
+            val scaleWidth: Int = final_bitmap.getWidth() / scaleDivider
+            val scaleHeight: Int = final_bitmap.getHeight() / scaleDivider
+            val bytes=getDownsizedImageBytes(final_bitmap,scaleWidth,scaleHeight)
             val storageReference = FirebaseStorage.getInstance().reference
             storageReference.child("Images").child(current_image_url?.lastPathSegment!!)
-                .putFile(current_image_url!!)
+                .putBytes(bytes!!)
                 .addOnSuccessListener {
                     it.metadata!!.reference!!.downloadUrl
                         .addOnSuccessListener {
@@ -144,7 +149,6 @@ class ImageUploadFragment(val tree_id: String) : Fragment() {
             if (it.resultCode == Activity.RESULT_OK) {
                 image_changed = true
                 current_image_url = Uri.fromFile(File(current_photo_path))
-
                 imageview.setImageURI(current_image_url)
                 if (message.visibility == View.VISIBLE)
                     message.visibility = View.GONE
@@ -157,16 +161,19 @@ class ImageUploadFragment(val tree_id: String) : Fragment() {
             }
         }
 
-    fun getImageSize(context: Context, uri: Uri?): Long {
-        val cursor: Cursor? = uri?.let { context.contentResolver.query(it, null, null, null, null) }
-        if (cursor != null) {
-            val sizeIndex: Int = cursor.getColumnIndex(OpenableColumns.SIZE)
-            cursor.moveToFirst()
-            val imageSize: Long = cursor.getLong(sizeIndex)
-            cursor.close()
-            return imageSize // returns size in bytes
-        }
-        return 0
+
+    @Throws(IOException::class)
+    fun getDownsizedImageBytes(
+        fullBitmap: Bitmap?,
+        scaleWidth: Int,
+        scaleHeight: Int
+    ): ByteArray? {
+        val scaledBitmap =
+            Bitmap.createScaledBitmap(fullBitmap!!, scaleWidth, scaleHeight, true)
+
+         val baos = ByteArrayOutputStream()
+        scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        return baos.toByteArray()
     }
 }
 

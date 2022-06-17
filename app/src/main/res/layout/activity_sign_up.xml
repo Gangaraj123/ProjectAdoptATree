@@ -9,7 +9,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:id="@+id/main_signup_layout"
-
         android:layout_height="match_parent"
         android:background="@drawable/signup_screen">
 
@@ -205,6 +204,17 @@
                 android:textSize="16sp"
                 android:text="Verify the email and Log in with you credentials.If you can't find the email in you
 mailbox, please kindly check in spam folder" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ok"
+                app:cornerRadius="15dp"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:id="@+id/ok_done_btn"
+                android:backgroundTint="@color/yellow" />
+
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

@@ -59,7 +59,7 @@ class SignUpActivity : AppCompatActivity() {
         }
         //Sign In Instead
         binding.textView.setOnClickListener {
-            startActivity(Intent(this, SignInActivity::class.java))
+
             finish()
         }
     }
@@ -71,22 +71,26 @@ class SignUpActivity : AppCompatActivity() {
                     val user = mAuth.currentUser
                     if (user != null) {
                         user.sendEmailVerification().addOnSuccessListener {
-                            Toast.makeText(this, "verification email has sent ", Toast.LENGTH_SHORT)
-                                .show()
+//                            Toast.makeText(this, "verification email has sent ", Toast.LENGTH_SHORT)
+//                                .show()
+                            addToDatabase(name, email, mAuth.currentUser?.uid!!, isManager)
+                            binding.relativeLayoutLoad2.setBackgroundColor(getColor(R.color.white))
+                            binding.relativeLayoutLoad2.visibility = View.VISIBLE
+                            binding.loadingSignup.visibility = View.GONE
+                            binding.emailSentLayout.visibility = View.VISIBLE
+                            binding.mainSignupLayout.visibility = View.GONE
+                            binding.okDoneBtn.setOnClickListener {
+                                finish()
+                            }
+                            Log.d(TAG, "done")
+                            mAuth.signOut()
                         }
                             .addOnFailureListener {
                                 Toast.makeText(this, "Invalid Email ", Toast.LENGTH_SHORT).show()
                                 Log.d(TAG, "Email sending failure")
                             }
                     }
-                    addToDatabase(name, email, mAuth.currentUser?.uid!!, isManager)
-                    binding.relativeLayoutLoad2.setBackgroundColor(getColor(R.color.white))
-                    binding.relativeLayoutLoad2.visibility = View.VISIBLE
-                    binding.loadingSignup.visibility = View.GONE
-                    binding.emailSentLayout.visibility = View.VISIBLE
-                    binding.mainSignupLayout.visibility = View.GONE
-                    Log.d(TAG, "done")
-                    mAuth.signOut()
+
                 } else {
                     Log.d(TAG, "Cannot create account!")
                     Toast.makeText(

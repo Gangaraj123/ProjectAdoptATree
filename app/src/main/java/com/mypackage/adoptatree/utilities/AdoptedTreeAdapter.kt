@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mypackage.adoptatree.R
 import com.mypackage.adoptatree.TAG
 import com.mypackage.adoptatree.User.AdoptedTreesActivity
-import com.mypackage.adoptatree.models.Tree
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,7 +37,7 @@ class AdoptedTreeAdapter(private val adoptedTreeList: List<AdoptedTreesActivity.
     override fun onBindViewHolder(holder: AdoptedTreeViewHolder, position: Int) {
         val adoptedTree = adoptedTreeList[position]
 
-        holder.nickname.text = adoptedTree.nickname
+        holder.nickname.text = adoptedTree.tree_nick_name
         holder.adoptedOn.text = convertTimeInMillisToString(adoptedTree.adopted_on)
 
         val zero: Long = 0
@@ -48,8 +47,8 @@ class AdoptedTreeAdapter(private val adoptedTreeList: List<AdoptedTreesActivity.
         } else {
             holder.lastWatered.text = convertTimeInMillisToString(adoptedTree.last_watered)
         }
-        Log.d(TAG,adoptedTree.toString())
-        Log.d(TAG,"id = "+adoptedTree.id!!)
+        Log.d(TAG, adoptedTree.toString())
+        Log.d(TAG, "id = " + adoptedTree.id!!)
         holder.imageButton.setOnClickListener {
             onImagesButtonClick?.invoke(adoptedTree.id!!)
         }

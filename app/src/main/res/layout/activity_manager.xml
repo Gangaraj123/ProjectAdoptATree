@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,6 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:backgroundTint="@color/green_2"
+            android:layout_gravity="center"
             android:text="SignOut" />
 
     </LinearLayout>
@@ -153,9 +154,9 @@
         android:id="@+id/verifying_qr_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:orientation="vertical"
         android:padding="10dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -246,5 +247,6 @@
             app:cornerRadius="10dp"
             app:icon="@drawable/ic_baseline_check_circle_24" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

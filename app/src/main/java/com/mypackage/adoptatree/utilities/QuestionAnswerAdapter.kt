@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDivider
- import com.mypackage.adoptatree.R
+import com.mypackage.adoptatree.R
 import com.mypackage.adoptatree.models.Question
-import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,7 +22,7 @@ class QuestionAnswerAdapter(private val questionsList: ArrayList<Question>) :
         val answerTextBox: TextView = itemView.findViewById(R.id.answerTextBox)
         val answeredOnTextBox: TextView = itemView.findViewById(R.id.answeredOnTextBox)
         val divider: MaterialDivider = itemView.findViewById(R.id.divider)
-        val notanswered:TextView=itemView.findViewById(R.id.not_answered_message)
+        val notanswered: TextView = itemView.findViewById(R.id.not_answered_message)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionAnswerViewHolder {
@@ -46,7 +45,7 @@ class QuestionAnswerAdapter(private val questionsList: ArrayList<Question>) :
             holder.answerText.visibility = View.GONE
             holder.answeredOn.visibility = View.GONE
             holder.answerTextBox.visibility = View.GONE
-            holder.notanswered.visibility=View.VISIBLE
+            holder.notanswered.visibility = View.VISIBLE
             holder.answeredOnTextBox.visibility = View.GONE
         }
     }

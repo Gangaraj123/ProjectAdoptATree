@@ -6,14 +6,20 @@ class Question {
     var answeredBy: String? = null
     var answeredOn: Long = 0 // timestamps
     var askedOn: Long = 0
-    var isAnswered:Boolean=false
+    var isAnswered: Boolean = false
+
     constructor() {}
-    constructor(question: String, answer: String? = null, answeredBy: String? = null,askedon:Long?=null) {
+    constructor(
+        question: String,
+        answer: String? = null,
+        answeredBy: String? = null,
+        askedon: Long? = null
+    ) {
         this.question = question
         this.answer = answer
         this.answeredBy = answeredBy
-        if(askedon!=null)
-        this.askedOn =askedon
-        else this.askedOn=System.currentTimeMillis()
+        if (askedon != null)
+            this.askedOn = askedon
+        else this.askedOn = System.currentTimeMillis()
     }
 }

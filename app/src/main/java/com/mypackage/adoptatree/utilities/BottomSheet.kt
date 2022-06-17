@@ -9,14 +9,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.firebase.database.FirebaseDatabase
 import com.mypackage.adoptatree.R
 
 class BottomSheet(val id: String) : BottomSheetDialogFragment() {
 
 
     data class UnansweredQuestion(val question_text: String, val askedOn: Long)
-        var onQuestionAdded:((String)->(Unit))?=null
+
+    var onQuestionAdded: ((String) -> (Unit))? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +24,7 @@ class BottomSheet(val id: String) : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.question_add_bottom_sheet, container, false)
-         val addButton = view.findViewById<Button>(R.id.btnAddItem)
+        val addButton = view.findViewById<Button>(R.id.btnAddItem)
         addButton.setOnClickListener {
             val editQuestion = view.findViewById<EditText>(R.id.editQuestion)
 

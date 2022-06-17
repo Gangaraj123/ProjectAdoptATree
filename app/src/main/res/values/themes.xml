@@ -14,9 +14,11 @@
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheet</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="CustomBottomSheet" parent="Theme.Design.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/CustomBottomSheetDialogModalTheme</item>
     </style>
+
     <style name="CustomBottomSheetDialogModalTheme" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/rounded_bottom_sheet</item>
     </style>

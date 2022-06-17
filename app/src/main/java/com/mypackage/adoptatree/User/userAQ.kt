@@ -1,4 +1,4 @@
-package com.mypackage.adoptatree.Maintainance.Update
+package com.mypackage.adoptatree.User
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,48 +7,51 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
-import com.mypackage.adoptatree.Adopted_trees
-import com.mypackage.adoptatree.Maintainance.UAQ_gardener_Adapter
+import com.mypackage.adoptatree.*
 import com.mypackage.adoptatree.R
-import com.mypackage.adoptatree.Tree_question_list_unanswered
-import com.mypackage.adoptatree.Trees
 import com.mypackage.adoptatree.models.Question
+import com.mypackage.adoptatree.utilities.QuestionAnswerAdapter
 
-
-class QuestionsFragment(val tree_id: String) : Fragment() {
-    private lateinit var uaq_recyclerview: RecyclerView
-    private lateinit var question_list: ArrayList<Question>
-    private lateinit var adapter: UAQ_gardener_Adapter
-    private lateinit var mdbref: DatabaseReference
+class userAQ(val tree_id: String, val answered_view: Boolean) : Fragment() {
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: QuestionAnswerAdapter
+    private lateinit var fdbref: DatabaseReference
     private var last_item_time = ""
     private lateinit var parent_scroll_view: NestedScrollView
     private var isCompleted = false
     private var isLoading = false
+    private var questionList = ArrayList<Question>()
     private lateinit var questions_loading: ProgressBar
+    private lateinit var path: String
+    private val pageViewModel: PageViewModel by activityViewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_update_questions, container, false)
+        return inflater.inflate(R.layout.fragment_user_a_q, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        last_item_time = System.currentTimeMillis().toString()
-        mdbref = FirebaseDatabase.getInstance().reference
+        path = if (answered_view) Tree_question_list_answered else Tree_question_list_unanswered
+        fdbref = FirebaseDatabase.getInstance().reference
+        recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(view.context)
         parent_scroll_view = view.findViewById(R.id.parent_scroll_view)
-        uaq_recyclerview = view.findViewById(R.id.uaq_recyclerview)
         questions_loading = view.findViewById(R.id.questions_loading)
-        question_list = ArrayList()
-
-        uaq_recyclerview.layoutManager = LinearLayoutManager(context)
-        adapter = UAQ_gardener_Adapter(question_list,tree_id)
-        uaq_recyclerview.adapter = adapter
+        adapter = QuestionAnswerAdapter(questionList)
+        recyclerView.adapter = adapter
+        last_item_time = System.currentTimeMillis().toString()
         LoadMore()
         parent_scroll_view.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             // on scroll change we are checking when users scroll as bottom.
@@ -58,20 +61,25 @@ class QuestionsFragment(val tree_id: String) : Fragment() {
                     questions_loading.visibility = View.VISIBLE
                     LoadMore()
                 }
-
             }
         })
+        if (!answered_view) {
+            pageViewModel.question.observe(viewLifecycleOwner, Observer {
+                questionList.add(0, it)
+                adapter.notifyItemInserted(0)
+            })
+        }
     }
 
     private fun LoadMore() {
-        mdbref.child(Trees).child(Adopted_trees).child(tree_id).child(Tree_question_list_unanswered)
+        fdbref.child(Trees).child(Adopted_trees).child(tree_id).child(path)
             .orderByKey().limitToLast(10).endBefore(last_item_time)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.childrenCount < 10) {
                         isCompleted = true
                         for (x in snapshot.children)
-                            question_list.add(x.getValue(Question::class.java)!!)
+                            questionList.add(x.getValue(Question::class.java)!!)
                         adapter.notifyItemRangeInserted(
                             adapter.itemCount,
                             (adapter.itemCount + snapshot.childrenCount).toInt()
@@ -79,7 +87,7 @@ class QuestionsFragment(val tree_id: String) : Fragment() {
                     } else {
                         last_item_time = snapshot.children.elementAt(0).key.toString()
                         for (x in snapshot.children)
-                            question_list.add(x.getValue(Question::class.java)!!)
+                            questionList.add(x.getValue(Question::class.java)!!)
                         adapter.notifyItemRangeInserted(adapter.itemCount, adapter.itemCount + 10)
                     }
                     isLoading = false
@@ -89,5 +97,4 @@ class QuestionsFragment(val tree_id: String) : Fragment() {
                 override fun onCancelled(error: DatabaseError) {}
             })
     }
-
 }

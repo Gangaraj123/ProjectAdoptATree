@@ -1,47 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-     android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".User.ActivityUserQA">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/parent_scroll_view"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="100"
-         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".Maintainance.Update.Update_Activity">
+        android:theme="@style/Theme.AdoptATree.AppBarOverlay">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="?actionBarSize"
+            android:padding="@dimen/appbar_padding"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="100"
-            android:orientation="vertical">
+            android:layout_height="wrap_content" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:layoutManager="LinearLayoutManager"
-                tools:itemCount="20"
-                tools:listitem="@layout/answered_questions_layout" />
-
-            <ProgressBar
-                android:id="@+id/questions_loading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:visibility="visible" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
@@ -49,8 +39,7 @@
         android:backgroundTint="@color/green_2"
         android:id="@+id/add_question"
         android:text="ask"
+        android:layout_gravity="bottom|end"
         app:icon="@drawable/ic_baseline_ask_question_24"
-          android:layout_margin="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_margin="20dp" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -63,6 +63,7 @@ class Register_Tree : AppCompatActivity() {
         scan_btn.setOnClickListener {
             val intent = Intent(this, QRCodeScanner::class.java)
             qr_cod_result_launcher.launch(intent)
+
         }
 
         back_btn.setOnClickListener {
@@ -96,9 +97,7 @@ class Register_Tree : AppCompatActivity() {
                                                 if (snapshot.exists()) {
                                                     showErrorMessage()
                                                 } else {
-                                                    if (qr_result != null) {
-                                                        Add_tree_in_database(qr_result)
-                                                    }
+                                                    Add_tree_in_database(qr_result)
                                                 }
                                             }
 
@@ -223,7 +222,8 @@ class Register_Tree : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_ASK_Location) {
             if (resultCode == RESULT_CANCELED) {
-                Log.d(TAG, "user refused to turn on location")
+                Toast.makeText(this, "Location access is needed", Toast.LENGTH_SHORT).show()
+                finish()
             } else if (resultCode == RESULT_OK) {
                 Log.d(TAG, "user turned on location")
                 update_location()

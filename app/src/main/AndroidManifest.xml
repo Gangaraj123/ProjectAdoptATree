@@ -49,15 +49,13 @@
             android:name=".Maintainance.Register_Tree"
             android:exported="false" />
         <activity
-            android:name=".ActivityUserQA"
+            android:name=".User.ActivityUserQA"
             android:exported="true" />
         <activity
             android:name=".User.AdoptedTreesActivity"
             android:exported="true"
             android:label="@string/title_activity_adopted_trees"
-            android:theme="@style/Theme.AdoptATree.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AdoptATree.NoActionBar"></activity>
         <activity
             android:name=".Maintainance.Manager_Activity"
             android:exported="true" />
@@ -75,7 +73,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".SignUpActivity"
@@ -85,19 +82,20 @@
             android:exported="true" />
 
         <provider
-            android:authorities="com.mypackage.adoptatree.fileprovider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="com.mypackage.adoptatree.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <service
             android:name=".utilities.NotificationService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

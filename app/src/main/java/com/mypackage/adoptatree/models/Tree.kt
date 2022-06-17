@@ -5,7 +5,7 @@ class Tree {
     var tree_nick_name: String? = null
     var location: Tree_Location? = null
     var adopted_by: String? = null
-    var adopted_on:Long=0
+    var adopted_on: Long = 0
     var tree_id: String = ""
 
     constructor() {}

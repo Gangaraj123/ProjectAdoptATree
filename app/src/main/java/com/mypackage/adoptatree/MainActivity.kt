@@ -19,10 +19,11 @@ const val Tree_question_list_unanswered =
 const val Tree_qr_value = "QR Value" // storing QR code value in tree node
 const val timestamp = "updated time" // for maintaining time of additions or updations
 const val Last_watered_time = "last_watered" // for maintaining last watered time
-const val Users="users"
-const val User_details="user details"
-const val Tree_Nick_Name="Tree Nick Name"
-const val Adopted_on="adopted_on"
+const val Users = "users"
+const val User_details = "user details"
+const val Tree_Nick_Name = "tree_nick_name"
+const val Adopted_on = "adopted_on"
+const val Unread_Question_count="Unread Questions count"
 
 class MainActivity : AppCompatActivity() {
 

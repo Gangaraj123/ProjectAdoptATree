@@ -3,6 +3,8 @@ package com.mypackage.adoptatree.Maintainance
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -82,7 +84,7 @@ class Manager_Activity : AppCompatActivity() {
 
             val intent = Intent(this, QRCodeScanner::class.java)
             water_tree_result_launcher.launch(intent)
-            Log.d(TAG, "started activity")
+
         }
         success_btn.setOnClickListener {
             main_linear_layout.visibility = View.VISIBLE
@@ -92,6 +94,7 @@ class Manager_Activity : AppCompatActivity() {
                 success_text_view.visibility = View.GONE
             if (invalid_code_view.visibility == View.VISIBLE)
                 invalid_code_view.visibility = View.GONE
+            qr_verify_load.visibility = View.VISIBLE
         }
     }
 
@@ -156,6 +159,9 @@ class Manager_Activity : AppCompatActivity() {
                                         Intent(this@Manager_Activity, Update_Activity::class.java)
                                     intent.putExtra("tree_id", snapshot.children.elementAt(0).key)
                                     startActivity(intent)
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        success_btn.callOnClick()
+                                    }, 1000)
                                 } else {
                                     Show_Error_Message()
                                 }
@@ -192,8 +198,8 @@ class Manager_Activity : AppCompatActivity() {
                                 val user_id = snapshot.value
                                 mdbRef.child("users").child(user_id as String).child(Adopted_trees)
                                     .child(uid).child(
-                                    Last_watered_time
-                                ).setValue(time)
+                                        Last_watered_time
+                                    ).setValue(time)
                             }
 
                             override fun onCancelled(error: DatabaseError) {}

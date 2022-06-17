@@ -15,9 +15,6 @@ import com.mypackage.adoptatree.R
 import com.mypackage.adoptatree.models.Image
 import com.mypackage.adoptatree.models.Image_Adapter
 
-val temp_url =
-    "https://firebasestorage.googleapis.com/v0/b/project-ready-chat.appspot.com/o/Images%2Fd23d7216-c459-4755-aec8-b03f7b4302fa.jpg?alt=media&token=3b24d698-6cde-455c-bc2d-7b33c96b96b1"
-
 class Tree_Images_Activity : AppCompatActivity() {
     private lateinit var imageRecyclerView: RecyclerView
     private lateinit var gridLayoutManager: GridLayoutManager
@@ -51,7 +48,7 @@ class Tree_Images_Activity : AppCompatActivity() {
         fade.excludeTarget(android.R.id.navigationBarBackground, true);
         window.enterTransition = fade
         window.exitTransition = fade
-        last_item_time=System.currentTimeMillis().toString()
+        last_item_time = System.currentTimeMillis().toString()
         LoadMore()
         parent_scroll_view.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             // on scroll change we are checking when users scroll as bottom.
@@ -66,13 +63,13 @@ class Tree_Images_Activity : AppCompatActivity() {
     }
 
     private fun LoadMore() {
-        Log.d(TAG,tree_id)
+        Log.d(TAG, tree_id)
         mdbRef.child(Trees).child(Adopted_trees).child(tree_id).child(Tree_photos_list)
-            .orderByKey().limitToLast(10) .endBefore(last_item_time)
+            .orderByKey().limitToLast(10).endBefore(last_item_time)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.childrenCount < 10) {
-                         isCompleted = true
+                        isCompleted = true
                         var temp: Image
                         for (x in snapshot.children) {
                             temp = Image()

@@ -42,7 +42,9 @@ class SignInActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         if (mAuth.uid != null) {
-//            startActivity(Intent(this, Manager_Activity::class.java))
+            if(mAuth.currentUser?.email.toString()=="202001107@daiict.ac.in")
+            startActivity(Intent(this, Manager_Activity::class.java))
+            else
             startActivity(Intent(this, AdoptedTreesActivity::class.java))
             finish()
         }
@@ -96,8 +98,10 @@ class SignInActivity : AppCompatActivity() {
                         startActivity(Intent(this, AdoptedTreesActivity::class.java))
                         finish()
                     } else {
+                        val intent = Intent(this, EmailVerificationActivity::class.java)
+                        intent.putExtra("user", mAuth.currentUser)
+                        startActivity(intent)
                         mAuth.signOut()
-                        Toast.makeText(this, "Email not verified", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show()
@@ -134,7 +138,10 @@ class SignInActivity : AppCompatActivity() {
                     if (user != null) {
                         addToDatabase(user.displayName!!, user.email!!, user.uid, false)
                         ImageManager.updateTokenInFirebase() // used for notifications
-                        startActivity(Intent(this@SignInActivity, Manager_Activity::class.java))
+                        if(mAuth.currentUser?.email.toString()=="202001107@daiict.ac.in")
+                            startActivity(Intent(this, Manager_Activity::class.java))
+                        else
+                            startActivity(Intent(this, AdoptedTreesActivity::class.java))
                         finish()
                     }
                 })

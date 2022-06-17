@@ -8,11 +8,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.mypackage.adoptatree.R
-import com.mypackage.adoptatree.TAG
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.mypackage.adoptatree.*
 import com.mypackage.adoptatree.models.Question
 
-class UAQ_gardener_Adapter(val questionList: ArrayList<Question>) :
+private val mdbref=FirebaseDatabase.getInstance().reference
+class UAQ_gardener_Adapter(val questionList: ArrayList<Question>,val tree_id:String) :
     RecyclerView.Adapter<UAQ_gardener_Adapter.UAQ_VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UAQ_VH {
@@ -25,7 +29,8 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>) :
         holder.question_text.text = questionList[position].question
 
         //recycler view recycles the views, so if this views display is changed when used before, reset it
-
+        holder.curr_question=questionList[position]
+        holder.tree_id=tree_id
         if (holder.answer_edit_text.visibility == View.VISIBLE)
             holder.answer_edit_text.visibility = View.GONE
         holder.answer_edit_text.setText("")
@@ -46,7 +51,8 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>) :
         var answer_edit_text: EditText
         var uaq_gardener_adapter: UAQ_gardener_Adapter? = null
         var question_text: TextView
-
+        var tree_id:String=""
+        var curr_question:Question?=null
         init {
             respond_btn = itemView.findViewById(R.id.btn_add_answer)
             submit_btn = itemView.findViewById(R.id.btn_submit_answer)
@@ -59,11 +65,47 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>) :
                 respond_btn.visibility = View.GONE
             }
             submit_btn.setOnClickListener {
-                submit_btn.text = "Done"
-                Log.d(TAG, "Clicked on item number= " + adapterPosition)
-                answer_edit_text.isEnabled = false
-                uaq_gardener_adapter?.questionList?.removeAt(adapterPosition)
-                uaq_gardener_adapter?.notifyItemRemoved(adapterPosition)
+                submit_btn.setOnClickListener {
+                    answer_edit_text.isEnabled = false
+                    curr_question?.answer = answer_edit_text.text.toString()
+                    curr_question?.answeredOn = System.currentTimeMillis()
+                    submit_btn.text = "submitting..."
+                    val current_tree_reference = mdbref.child(Trees).child(Adopted_trees).child(tree_id)
+                    current_tree_reference.child(Tree_question_list_unanswered)
+                        .child(curr_question?.askedOn.toString())
+                        .removeValue().addOnSuccessListener {
+                            current_tree_reference.child(Tree_question_list_answered)
+                                .child(curr_question?.answeredOn.toString())
+                                .setValue(curr_question)
+                                .addOnSuccessListener {
+                                    current_tree_reference.child(Unread_Question_count)
+                                        .addListenerForSingleValueEvent(object : ValueEventListener {
+                                            override fun onDataChange(snapshot: DataSnapshot) {
+                                                var count = 0L
+                                                if (snapshot.exists())
+                                                    count = snapshot.value as Long
+                                                Log.d(TAG, "current count = " + count)
+                                                snapshot.ref.setValue(count + 1)
+                                            }
+
+                                            override fun onCancelled(error: DatabaseError) {}
+                                        })
+                                    submit_btn.text = "Done"
+                                    // remove it from list
+                                    Log.d(
+                                        TAG,
+                                        "current list size = " + uaq_gardener_adapter?.questionList?.size
+                                    )
+                                    try {
+                                        uaq_gardener_adapter?.questionList?.removeAt(adapterPosition)
+                                        uaq_gardener_adapter?.notifyItemRemoved(adapterPosition)
+                                    } catch (e: Exception) {
+                                        Log.d(TAG, "Error occured while removing from adapter")
+                                    }
+                                }
+                        }
+
+                }
             }
         }
 
@@ -75,24 +117,3 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>) :
     }
 }
 
-//class UAQ_VH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//
-//    init {
-//        respond_btn = itemView.findViewById(R.id.btn_add_answer)
-//        submit_btn = itemView.findViewById(R.id.btn_submit_answer)
-//        answer_edit_text = itemView.findViewById(R.id.entered_response)
-//        respond_btn.setOnClickListener { view: View? ->
-//            answer_edit_text.visibility = View.VISIBLE
-//            respond_btn.visibility = View.GONE
-//            submit_btn.visibility = View.VISIBLE
-//        }
-//        submit_btn.setOnClickListener {
-//            submit_btn.text = "Done"
-//            answer_edit_text.isEnabled = false
-////            Handler().postDelayed(Runnable {
-//            uaq_gardener_adapter!!.questionList.removeAt(adapterPosition)
-//            uaq_gardener_adapter!!.notifyItemRemoved(adapterPosition)
-////            }, 2000)
-//        }
-//    }
-//}
