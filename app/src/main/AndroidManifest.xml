@@ -49,8 +49,18 @@
             android:name=".Maintainance.Register_Tree"
             android:exported="false" />
         <activity
+            android:name=".ActivityUserQA"
+            android:exported="true" />
+        <activity
+            android:name=".User.AdoptedTreesActivity"
+            android:exported="true"
+            android:label="@string/title_activity_adopted_trees"
+            android:theme="@style/Theme.AdoptATree.NoActionBar">
+
+        </activity>
+        <activity
             android:name=".Maintainance.Manager_Activity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".utilities.ImageViewer"
             android:exported="false" />
@@ -83,13 +93,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <service android:name=".utilities.NotificationService"
-            android:exported="false"
-            >
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT">
-            </action>
-        </intent-filter>
+        <service
+            android:name=".utilities.NotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+            </intent-filter>
         </service>
     </application>
 

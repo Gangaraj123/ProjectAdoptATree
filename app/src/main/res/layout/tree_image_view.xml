@@ -7,7 +7,7 @@
     android:elevation="10dp"
     app:cardCornerRadius="20dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="194dp"
             android:transitionName="fade"
+            android:src="@drawable/image_not_available"
             android:importantForAccessibility="no"
             android:scaleType="centerCrop" />
 
@@ -24,9 +25,10 @@
             android:layout_width="wrap_content"
             android:id="@+id/image_date"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/black"
+             android:layout_alignBottom="@id/item_image"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
             android:text="22/09/12 4:35 pm" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

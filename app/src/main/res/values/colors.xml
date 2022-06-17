@@ -18,4 +18,5 @@
     <color name="dark_brown">#592202</color>
     <color name="light_brown">#D9B991</color>
     <color name="orange">#FFB443</color>
+    <color name="shimmer_placeholder">#dddddd</color>
 </resources>

@@ -156,6 +156,7 @@ class ImageUploadFragment(val tree_id: String) : Fragment() {
                     edit_btn.visibility = View.VISIBLE
             }
         }
+
     fun getImageSize(context: Context, uri: Uri?): Long {
         val cursor: Cursor? = uri?.let { context.contentResolver.query(it, null, null, null, null) }
         if (cursor != null) {

@@ -74,6 +74,10 @@ dependencies {
     // Dependency for Crop Image and For ZoomImageView
     implementation 'com.github.yalantis:ucrop:2.2.6'
     implementation 'com.github.MikeOrtiz:TouchImageView:1.4.1'
+
+    // Dependency for Loading Effect
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

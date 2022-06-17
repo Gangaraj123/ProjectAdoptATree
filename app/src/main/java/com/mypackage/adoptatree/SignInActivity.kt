@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.mypackage.adoptatree.Maintainance.Manager_Activity
+import com.mypackage.adoptatree.User.AdoptedTreesActivity
 import com.mypackage.adoptatree.databinding.ActivitySignInBinding
 import com.mypackage.adoptatree.models.Manager
 import com.mypackage.adoptatree.models.User
@@ -41,7 +42,8 @@ class SignInActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         if (mAuth.uid != null) {
-            startActivity(Intent(this, Manager_Activity::class.java))
+//            startActivity(Intent(this, Manager_Activity::class.java))
+            startActivity(Intent(this, AdoptedTreesActivity::class.java))
             finish()
         }
 
@@ -91,7 +93,7 @@ class SignInActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     if (mAuth.currentUser!!.isEmailVerified) {
                         ImageManager.updateTokenInFirebase()
-                        startActivity(Intent(this, Manager_Activity::class.java))
+                        startActivity(Intent(this, AdoptedTreesActivity::class.java))
                         finish()
                     } else {
                         mAuth.signOut()

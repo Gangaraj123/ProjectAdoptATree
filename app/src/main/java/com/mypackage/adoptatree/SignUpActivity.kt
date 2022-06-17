@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
-import com.mypackage.adoptatree.Maintainance.Manager_Activity
 import com.mypackage.adoptatree.databinding.ActivitySignUpBinding
 import com.mypackage.adoptatree.models.Manager
 import com.mypackage.adoptatree.models.User
@@ -180,7 +179,7 @@ class SignUpActivity : AppCompatActivity() {
                     if (user != null) {
                         addToDatabase(user.displayName!!, user.email!!, user.uid, false)
                         ImageManager.updateTokenInFirebase()
-                        startActivity(Intent(this@SignUpActivity, Manager_Activity::class.java))
+                        startActivity(Intent(this@SignUpActivity, Adopted_trees::class.java))
                         finish()
                     } else {
                         Toast.makeText(this, "SignIn Failed", Toast.LENGTH_SHORT).show()

@@ -29,9 +29,9 @@ class Manager_Activity : AppCompatActivity() {
     private lateinit var main_linear_layout: LinearLayout
     private lateinit var verifying_layout: LinearLayout
     private lateinit var success_btn: Button
-    private lateinit var invalid_code_view:LinearLayout
-    private lateinit var success_text_view:TextView
-    private lateinit var qr_verify_load:LinearLayout
+    private lateinit var invalid_code_view: LinearLayout
+    private lateinit var success_text_view: TextView
+    private lateinit var qr_verify_load: LinearLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manager)
@@ -51,11 +51,11 @@ class Manager_Activity : AppCompatActivity() {
             finish()
         }
         mdbRef = FirebaseDatabase.getInstance().reference
-        qr_verify_load=findViewById(R.id.qr_verify_load)
+        qr_verify_load = findViewById(R.id.qr_verify_load)
         main_linear_layout = findViewById(R.id.main_layout)
         verifying_layout = findViewById(R.id.verifying_qr_code)
-        invalid_code_view=findViewById(R.id.invalid_code_view)
-        success_text_view=findViewById(R.id.success_code)
+        invalid_code_view = findViewById(R.id.invalid_code_view)
+        success_text_view = findViewById(R.id.success_code)
         btn_generate_barcode = findViewById(R.id.btn_generate_bar_code)
         btn_register_tree = findViewById(R.id.btn_register_tree)
         btn_update_tree_status = findViewById(R.id.btn_update_status)
@@ -87,11 +87,11 @@ class Manager_Activity : AppCompatActivity() {
         success_btn.setOnClickListener {
             main_linear_layout.visibility = View.VISIBLE
             verifying_layout.visibility = View.GONE
-            success_btn.visibility=View.GONE
-            if(success_text_view.visibility==View.VISIBLE)
-                success_text_view.visibility=View.GONE
-            if(invalid_code_view.visibility==View.VISIBLE)
-                invalid_code_view.visibility=View.GONE
+            success_btn.visibility = View.GONE
+            if (success_text_view.visibility == View.VISIBLE)
+                success_text_view.visibility = View.GONE
+            if (invalid_code_view.visibility == View.VISIBLE)
+                invalid_code_view.visibility = View.GONE
         }
     }
 
@@ -100,12 +100,12 @@ class Manager_Activity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val qr_result = result.data?.getStringExtra("scan_result")
-                Log.d(TAG,qr_result.toString())
+                Log.d(TAG, qr_result.toString())
                 main_linear_layout.visibility = View.GONE
                 verifying_layout.visibility = View.VISIBLE
-                qr_verify_load.visibility=View.VISIBLE
+                qr_verify_load.visibility = View.VISIBLE
                 if (qr_result != null && is_valid_firebase_path(qr_result)) {
-                    Log.d(TAG,"Gone inside")
+                    Log.d(TAG, "Gone inside")
                     mdbRef.child(Trees).child(Adopted_trees).orderByChild(Tree_qr_value)
                         .equalTo(qr_result)
                         .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -137,8 +137,7 @@ class Manager_Activity : AppCompatActivity() {
 
                             override fun onCancelled(error: DatabaseError) {}
                         })
-                }
-            else Show_Error_Message()
+                } else Show_Error_Message()
             }
         }
     private var update_tree_result_launcher =
@@ -161,19 +160,19 @@ class Manager_Activity : AppCompatActivity() {
                                     Show_Error_Message()
                                 }
                             }
+
                             override fun onCancelled(error: DatabaseError) {}
                         })
-                }
-                else Show_Error_Message()
+                } else Show_Error_Message()
             }
         }
 
     private fun Show_Error_Message() {
-        qr_verify_load.visibility=View.GONE
-        if(success_text_view.visibility==View.VISIBLE)
-            success_text_view.visibility=View.GONE
-        if(invalid_code_view.visibility!=View.VISIBLE)
-        invalid_code_view.visibility=View.VISIBLE
+        qr_verify_load.visibility = View.GONE
+        if (success_text_view.visibility == View.VISIBLE)
+            success_text_view.visibility = View.GONE
+        if (invalid_code_view.visibility != View.VISIBLE)
+            invalid_code_view.visibility = View.VISIBLE
         success_btn.visibility = View.VISIBLE
     }
 
@@ -181,21 +180,36 @@ class Manager_Activity : AppCompatActivity() {
         val path = if (isadopted)
             Adopted_trees
         else Registered_trees
+        val time = System.currentTimeMillis()
         mdbRef.child(Trees).child(path).child(uid)
-            .child(Last_watered_time).setValue(System.currentTimeMillis())
+            .child(Last_watered_time).setValue(time)
             .addOnSuccessListener {
+                if (isadopted) {
+                    mdbRef.child(Trees).child(Adopted_trees).child(uid).child(Tree_details)
+                        .child("adopted_by")
+                        .addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                val user_id = snapshot.value
+                                mdbRef.child("users").child(user_id as String).child(Adopted_trees)
+                                    .child(uid).child(
+                                    Last_watered_time
+                                ).setValue(time)
+                            }
 
-                    qr_verify_load.visibility=View.GONE
-                if(invalid_code_view.visibility==View.VISIBLE)
-                    invalid_code_view.visibility=View.GONE
-                if(success_text_view.visibility!=View.VISIBLE)
-                    success_text_view.visibility=View.VISIBLE
+                            override fun onCancelled(error: DatabaseError) {}
+                        })
+                }
+                qr_verify_load.visibility = View.GONE
+                if (invalid_code_view.visibility == View.VISIBLE)
+                    invalid_code_view.visibility = View.GONE
+                if (success_text_view.visibility != View.VISIBLE)
+                    success_text_view.visibility = View.VISIBLE
                 success_btn.visibility = View.VISIBLE
             }
     }
 
     private fun is_valid_firebase_path(str: String): Boolean {
-        if(str.isEmpty())return false
+        if (str.isEmpty()) return false
         val invalid_characters = listOf('.', '#', '[', ']', '$')
         for (i in str) {
             if (i in invalid_characters)

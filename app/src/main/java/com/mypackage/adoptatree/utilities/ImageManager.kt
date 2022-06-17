@@ -44,11 +44,11 @@ internal object ImageManager {
                     mdbRef.child("users").child(uid).child("Notification_token")
                         .setValue(it.result)
                 }
-                Log.d(TAG,"token = "+it.result)
+                Log.d(TAG, "token = " + it.result)
             }
         }
             .addOnFailureListener {
-                Log.d(TAG,"Can't get token")
+                Log.d(TAG, "Can't get token")
             }
     }
 }

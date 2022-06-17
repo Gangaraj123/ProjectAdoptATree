@@ -2,18 +2,16 @@ package com.mypackage.adoptatree.User
 
 import android.os.Bundle
 import android.transition.Fade
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
-import com.mypackage.adoptatree.Adopted_trees
+import com.mypackage.adoptatree.*
 import com.mypackage.adoptatree.R
-import com.mypackage.adoptatree.Tree_photos_list
-import com.mypackage.adoptatree.Trees
 import com.mypackage.adoptatree.models.Image
 import com.mypackage.adoptatree.models.Image_Adapter
 
@@ -37,8 +35,8 @@ class Tree_Images_Activity : AppCompatActivity() {
         setContentView(R.layout.activity_tree_images)
 
         // pass tree id to it while starting activity
-        tree_id = intent.getStringExtra("tree_id").toString()
-        tree_images_list = ArrayList<Image>()
+        tree_id = intent.getStringExtra("id").toString()
+        tree_images_list = ArrayList()
 
         imageRecyclerView = findViewById(R.id.image_recycler_view)
         images_loading = findViewById(R.id.items_loading)
@@ -53,7 +51,8 @@ class Tree_Images_Activity : AppCompatActivity() {
         fade.excludeTarget(android.R.id.navigationBarBackground, true);
         window.enterTransition = fade
         window.exitTransition = fade
-
+        last_item_time=System.currentTimeMillis().toString()
+        LoadMore()
         parent_scroll_view.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             // on scroll change we are checking when users scroll as bottom.
             if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
@@ -67,12 +66,13 @@ class Tree_Images_Activity : AppCompatActivity() {
     }
 
     private fun LoadMore() {
+        Log.d(TAG,tree_id)
         mdbRef.child(Trees).child(Adopted_trees).child(tree_id).child(Tree_photos_list)
-            .orderByKey().limitToLast(10).endBefore(last_item_time)
+            .orderByKey().limitToLast(10) .endBefore(last_item_time)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.childrenCount < 10) {
-                        isCompleted = true
+                         isCompleted = true
                         var temp: Image
                         for (x in snapshot.children) {
                             temp = Image()
@@ -97,7 +97,6 @@ class Tree_Images_Activity : AppCompatActivity() {
                                 image_RV_Adapter.itemCount + 10
                             )
                         }
-
                     }
                     isLoading = false
                     images_loading.visibility = View.GONE
