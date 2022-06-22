@@ -11,16 +11,17 @@
     <com.ortiz.touchview.TouchImageView
         android:id="@+id/zoomable_image_view"
         android:layout_width="match_parent"
-        android:transitionName="fade"
         android:layout_height="match_parent"
         android:src="@drawable/image_not_available"
+        android:transitionName="fade"
         app:layout_constraintTop_toBottomOf="@id/action_bar_temp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/action_bar_temp"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="?attr/selectableItemBackground"
-        android:id="@+id/action_bar_temp">
+        android:layout_marginTop="24dp"
+        android:background="?attr/selectableItemBackground">
 
         <ImageButton
             android:id="@+id/back_btn"

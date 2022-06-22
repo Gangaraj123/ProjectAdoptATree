@@ -15,9 +15,9 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager, va
     FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
         return if (position == 0)
-            QuestionsFragment(tree_id)
+            QuestionsFragment.newInstance(tree_id)
         else
-            ImageUploadFragment(tree_id)
+            ImageUploadFragment.newInstance(tree_id)
     }
 
     override fun getPageTitle(position: Int): CharSequence? {

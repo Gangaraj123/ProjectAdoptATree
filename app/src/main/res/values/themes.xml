@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.AdoptATree" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -10,8 +10,10 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/yellow</item>
+        <item name="fontFamily">serif</item>
+        <item name="android:statusBarColor">@color/green_dark</item>
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheet</item>
+        <item name="android:actionOverflowButtonStyle">@style/actionOverflowButtonStyle</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -23,6 +25,16 @@
         <item name="android:background">@drawable/rounded_bottom_sheet</item>
     </style>
 
+    <style name="AppTheme.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- THIS is where you can color the arrow and the overflow button! -->
+        <item name="actionOverflowButtonStyle">@style/actionOverflowButtonStyle
+        </item> <!-- sets the style for the overflow button -->
+    </style>
+
+    <!-- This style is where you define the tint color of your overflow menu button -->
+    <style name="actionOverflowButtonStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/white</item>
+    </style>
 
     <style name="LoginTextInputOuterFieldStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_width">match_parent</item>
@@ -46,7 +58,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="android:statusBarColor">@color/white</item>
+    </style>
+
     <style name="Theme.AdoptATree.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.AdoptATree.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <dimen name="action_button_padding">10dp</dimen>
 </resources>

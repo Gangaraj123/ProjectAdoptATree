@@ -31,11 +31,12 @@ import java.io.IOException
 import java.util.*
 
 
-class ImageUploadFragment(val tree_id: String) : Fragment() {
+class ImageUploadFragment : Fragment() {
 
     private lateinit var update_btn: Button
     private lateinit var capture_btn: Button
     private lateinit var message: TextView
+    private lateinit var tree_id: String
     private lateinit var imageview: ImageView
     private var current_image_url: Uri? = null
     private var image_changed = false
@@ -46,6 +47,14 @@ class ImageUploadFragment(val tree_id: String) : Fragment() {
     private lateinit var uploaded_percent: TextView
     private lateinit var current_photo_path: String
     private lateinit var mdbRef: DatabaseReference
+    private lateinit var uploaded: LinearLayout
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            tree_id = it.getString("tree_id").toString()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,6 +72,7 @@ class ImageUploadFragment(val tree_id: String) : Fragment() {
         image_layout = view.findViewById(R.id.Image_upload_view)
         imageview = view.findViewById(R.id.update_image_view)
         uploaded_percent = view.findViewById(R.id.uploaded_percent)
+        uploaded = view.findViewById(R.id.uploaded)
         capture_btn.setOnClickListener {
             val filename: String = "photo"
             val storagedir: File? = view.context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
@@ -108,11 +118,14 @@ class ImageUploadFragment(val tree_id: String) : Fragment() {
                 view.findViewById<LinearProgressIndicator>(R.id.uploaded_progessbar)
             image_layout.visibility = View.GONE
             uploading_layout.visibility = View.VISIBLE
-            val scaleDivider=4
-           val final_bitmap=MediaStore.Images.Media.getBitmap(requireContext().contentResolver, current_image_url)
+            val scaleDivider = 4
+            val final_bitmap = MediaStore.Images.Media.getBitmap(
+                requireContext().contentResolver,
+                current_image_url
+            )
             val scaleWidth: Int = final_bitmap.getWidth() / scaleDivider
             val scaleHeight: Int = final_bitmap.getHeight() / scaleDivider
-            val bytes=getDownsizedImageBytes(final_bitmap,scaleWidth,scaleHeight)
+            val bytes = getDownsizedImageBytes(final_bitmap, scaleWidth, scaleHeight)
             val storageReference = FirebaseStorage.getInstance().reference
             storageReference.child("Images").child(current_image_url?.lastPathSegment!!)
                 .putBytes(bytes!!)
@@ -125,8 +138,8 @@ class ImageUploadFragment(val tree_id: String) : Fragment() {
                                 .child(System.currentTimeMillis().toString())
                                 .setValue(new_image_url)
                                 .addOnSuccessListener {
-                                    uploading_layout.findViewById<TextView>(R.id.upload_success).text =
-                                        "uploaded successfully"
+                                    uploaded.visibility = View.VISIBLE
+                                    uploading_layout.visibility = View.GONE
                                 }
                                 .addOnFailureListener {
                                     uploading_layout.findViewById<TextView>(R.id.upload_success).text =
@@ -171,9 +184,19 @@ class ImageUploadFragment(val tree_id: String) : Fragment() {
         val scaledBitmap =
             Bitmap.createScaledBitmap(fullBitmap!!, scaleWidth, scaleHeight, true)
 
-         val baos = ByteArrayOutputStream()
+        val baos = ByteArrayOutputStream()
         scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         return baos.toByteArray()
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String) =
+            ImageUploadFragment().apply {
+                arguments = Bundle().apply {
+                    putString("tree_id", param1)
+                }
+            }
     }
 }
 

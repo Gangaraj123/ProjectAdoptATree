@@ -33,7 +33,7 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var gsignigClient: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setTheme(R.style.Theme_AdoptATree)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -42,10 +42,10 @@ class SignInActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         if (mAuth.uid != null) {
-            if(mAuth.currentUser?.email.toString()=="202001107@daiict.ac.in")
-            startActivity(Intent(this, Manager_Activity::class.java))
+            if (mAuth.currentUser?.email.toString() == "202001107@daiict.ac.in")
+                startActivity(Intent(this, Manager_Activity::class.java))
             else
-            startActivity(Intent(this, AdoptedTreesActivity::class.java))
+                startActivity(Intent(this, AdoptedTreesActivity::class.java))
             finish()
         }
 
@@ -138,7 +138,7 @@ class SignInActivity : AppCompatActivity() {
                     if (user != null) {
                         addToDatabase(user.displayName!!, user.email!!, user.uid, false)
                         ImageManager.updateTokenInFirebase() // used for notifications
-                        if(mAuth.currentUser?.email.toString()=="202001107@daiict.ac.in")
+                        if (mAuth.currentUser?.email.toString() == "202001107@daiict.ac.in")
                             startActivity(Intent(this, Manager_Activity::class.java))
                         else
                             startActivity(Intent(this, AdoptedTreesActivity::class.java))

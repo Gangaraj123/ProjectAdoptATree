@@ -22,16 +22,20 @@ class ActivityUserQA : AppCompatActivity() {
 
         binding = ActivityUserQaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
         val id = intent.getStringExtra("id").toString()
+        val nickname = intent.getStringExtra("tree_name").toString()
+        binding.treeNickName.text = nickname
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, id)
         val viewPager: ViewPager = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
         tabs.setupWithViewPager(viewPager)
-
         binding.addQuestion.setOnClickListener {
             val fdbref = FirebaseDatabase.getInstance().reference
-            val bottomSheet = BottomSheet(id!!)
+            val bottomSheet = BottomSheet()
             bottomSheet.show(supportFragmentManager, "TAG")
             bottomSheet.onQuestionAdded = {
                 val curr_time = System.currentTimeMillis()
@@ -45,4 +49,5 @@ class ActivityUserQA : AppCompatActivity() {
             }
         }
     }
+
 }

@@ -18,16 +18,24 @@ import com.mypackage.adoptatree.Trees
 import com.mypackage.adoptatree.models.Question
 
 
-class QuestionsFragment(val tree_id: String) : Fragment() {
+class QuestionsFragment : Fragment() {
     private lateinit var uaq_recyclerview: RecyclerView
     private lateinit var question_list: ArrayList<Question>
     private lateinit var adapter: UAQ_gardener_Adapter
     private lateinit var mdbref: DatabaseReference
+    private lateinit var tree_id: String
     private var last_item_time = ""
     private lateinit var parent_scroll_view: NestedScrollView
     private var isCompleted = false
     private var isLoading = false
     private lateinit var questions_loading: ProgressBar
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            tree_id = it.getString("tree_id").toString()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,7 +55,7 @@ class QuestionsFragment(val tree_id: String) : Fragment() {
         question_list = ArrayList()
 
         uaq_recyclerview.layoutManager = LinearLayoutManager(context)
-        adapter = UAQ_gardener_Adapter(question_list,tree_id)
+        adapter = UAQ_gardener_Adapter(question_list, tree_id)
         uaq_recyclerview.adapter = adapter
         LoadMore()
         parent_scroll_view.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
@@ -90,4 +98,13 @@ class QuestionsFragment(val tree_id: String) : Fragment() {
             })
     }
 
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String) =
+            QuestionsFragment().apply {
+                arguments = Bundle().apply {
+                    putString("tree_id", param1)
+                }
+            }
+    }
 }

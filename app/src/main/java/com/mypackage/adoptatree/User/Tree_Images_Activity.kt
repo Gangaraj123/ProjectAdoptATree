@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.transition.Fade
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,7 +36,12 @@ class Tree_Images_Activity : AppCompatActivity() {
         // pass tree id to it while starting activity
         tree_id = intent.getStringExtra("id").toString()
         tree_images_list = ArrayList()
-
+        val name = intent.getStringExtra("tree_name").toString()
+        val back_btn = findViewById<ImageButton>(R.id.back_btn)
+        back_btn.setOnClickListener {
+            onBackPressed()
+        }
+        findViewById<TextView>(R.id.tree_nick_name).text = name
         imageRecyclerView = findViewById(R.id.image_recycler_view)
         images_loading = findViewById(R.id.items_loading)
         gridLayoutManager = GridLayoutManager(this, 2)

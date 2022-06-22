@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable-v23/splash_bg.xml" value="0.1765" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1225" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/black_cursor.xml" value="0.118" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_appicon.xml" value="0.1825" />
@@ -12,26 +13,35 @@
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.172" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_baseline_add_image_24.xml" value="0.1565" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.172" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_baseline_cloud_done_24.xml" value="0.1765" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_baseline_gear_icon.xml" value="0.172" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_baseline_image_select_24.xml" value="0.1565" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1915" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_baseline_qr_code_scanner_24.xml" value="0.172" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_baseline_save_image_24.xml" value="0.1565" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1225" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_map_layers.xml" value="0.1915" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_menu_icon_24.xml" value="0.118" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_pngkey_com_capsule_corp_logo_png_6519962.xml" value="0.1565" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_qr_generate_icon.xml" value="0.1565" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_register.xml" value="0.172" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_rotating_gear_icon.xml" value="0.172" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_signout.xml" value="0.1765" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_watering_icon.xml" value="0.172" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/ic_watering_tree.xml" value="0.172" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/rounded_bottom_sheet.xml" value="0.118" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/rounded_rectangle.xml" value="0.1915" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/roundedbutton.xml" value="0.118" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/rounder_bg_bottomshee.xml" value="0.118" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/splash_bg.xml" value="0.1765" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/text_background_light_round.xml" value="0.2555" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/drawable/tree_view_bg.xml" value="0.118" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_adopted_trees.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_email_verification.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_image_viewr.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_manager.xml" value="0.25" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_maps.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_qrcode_generator.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_qrcode_scanner.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_register_tree.xml" value="0.2359375" />
@@ -40,9 +50,10 @@
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_tree_images.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_udate2.xml" value="0.2359375" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_update.xml" value="0.2359375" />
-        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_user_qa.xml" value="0.20425531914893616" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_user_qa.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/activity_user_questions.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/answered_questions_layout.xml" value="0.25" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/custom_action_bar_tree_questions.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/fragment_blank.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/fragment_image_upload.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/fragment_udate__activity_2.xml" value="0.25" />
@@ -57,10 +68,11 @@
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/row_add_item.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/tree_image_view.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/tree_item_shimmer_layout.xml" value="0.17592592592592593" />
-        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/tree_item_user_side.xml" value="0.17592592592592593" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/tree_item_user_side.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/unanswered_question_gardener.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/unanswered_question_user.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/layout/verifying_dialog_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/menu/pop_up_menu.xml" value="0.25" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/mipmap-anydpi-v26/ic_app_launcher.xml" value="0.1225" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.104" />
         <entry key="..\:/Users/rajini bopparam/Downloads/AdoptATree/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1225" />

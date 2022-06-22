@@ -1,6 +1,7 @@
 package com.mypackage.adoptatree.User
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,9 @@ import com.mypackage.adoptatree.R
 import com.mypackage.adoptatree.models.Question
 import com.mypackage.adoptatree.utilities.QuestionAnswerAdapter
 
-class userAQ(val tree_id: String, val answered_view: Boolean) : Fragment() {
+class userAQ : Fragment() {
+    private lateinit var tree_id: String
+    private var answered_view = false
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: QuestionAnswerAdapter
     private lateinit var fdbref: DatabaseReference
@@ -29,8 +32,14 @@ class userAQ(val tree_id: String, val answered_view: Boolean) : Fragment() {
     private lateinit var questions_loading: ProgressBar
     private lateinit var path: String
     private val pageViewModel: PageViewModel by activityViewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            tree_id = it.getString("tree_id").toString()
+            answered_view = it.getBoolean("IsAnswered")
+            Log.d(TAG, "id = $tree_id and answerd view = $answered_view")
+        }
     }
 
     override fun onCreateView(
@@ -97,4 +106,16 @@ class userAQ(val tree_id: String, val answered_view: Boolean) : Fragment() {
                 override fun onCancelled(error: DatabaseError) {}
             })
     }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String, param2: Boolean) =
+            userAQ().apply {
+                arguments = Bundle().apply {
+                    putString("tree_id", param1)
+                    putBoolean("IsAnswered", param2)
+                }
+            }
+    }
 }
+

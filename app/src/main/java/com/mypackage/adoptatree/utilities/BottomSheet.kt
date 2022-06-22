@@ -11,10 +11,8 @@ import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mypackage.adoptatree.R
 
-class BottomSheet(val id: String) : BottomSheetDialogFragment() {
+class BottomSheet : BottomSheetDialogFragment() {
 
-
-    data class UnansweredQuestion(val question_text: String, val askedOn: Long)
 
     var onQuestionAdded: ((String) -> (Unit))? = null
 

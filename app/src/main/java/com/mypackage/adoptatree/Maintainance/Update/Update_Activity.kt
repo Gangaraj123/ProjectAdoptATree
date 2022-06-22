@@ -28,6 +28,9 @@ class Update_Activity : AppCompatActivity() {
         val tabs: TabLayout = binding.tabs
         tabs.setupWithViewPager(viewPager)
 
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -36,4 +39,5 @@ class Update_Activity : AppCompatActivity() {
             imguploadviewmodel.setData(UCrop.getOutput(data!!).toString())
         }
     }
+
 }

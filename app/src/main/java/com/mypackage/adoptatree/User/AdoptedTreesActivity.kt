@@ -5,11 +5,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,31 +43,35 @@ class AdoptedTreesActivity : AppCompatActivity() {
         val tree_nick_name: String,
         val adopted_on: Long,
         var last_watered: Long,
-        val id: String
+        val id: String,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAdoptedTreesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        val toolbar: Toolbar = findViewById(R.id.mytoolbar)
+        setSupportActionBar(toolbar)
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         treeAdapter = AdoptedTreeAdapter(adoptedTrees)
         recyclerView.adapter = treeAdapter
         fdbref = FirebaseDatabase.getInstance().reference
         dialog = Dialog(this)
-        treeAdapter.onImagesButtonClick = {
+        treeAdapter.onImagesButtonClick = { id, name ->
             val intent =
                 Intent(this@AdoptedTreesActivity, Tree_Images_Activity::class.java)
-            intent.putExtra("id", it)
+            intent.putExtra("id", id)
+            intent.putExtra("tree_name", name)
             startActivity(intent)
         }
+
         shimmerLayout = binding.shimmerLayout
         shimmerLayout.startShimmer()
-        treeAdapter.onQuestionsButtonClick = {
+        treeAdapter.onQuestionsButtonClick = { id, name ->
             val intent = Intent(this@AdoptedTreesActivity, ActivityUserQA::class.java)
-            intent.putExtra("id", it)
+            intent.putExtra("id", id)
+            intent.putExtra("tree_name", name)
             startActivity(intent)
         }
         mAuth = FirebaseAuth.getInstance()
@@ -79,21 +86,9 @@ class AdoptedTreesActivity : AppCompatActivity() {
         binding.adoptTree.setOnClickListener {
             //make button unclickable, so that spamming doesn't add multiple trees
             Add_tree()
+//            startActivity(Intent(this, MapsActivity::class.java))
         }
-        binding.signout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            try {
-                GoogleSignIn.getClient(
-                    this, GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.my_web_client_ID))
-                        .requestEmail().build()
-                ).signOut()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
-        }
+
     }
 
     fun refresh() {
@@ -127,10 +122,9 @@ class AdoptedTreesActivity : AppCompatActivity() {
                         recyclerView.visibility = View.VISIBLE
                         shimmerLayout.visibility = View.GONE
                         shimmerLayout.startShimmer()
-                    }
-                    else{
+                    } else {
                         // empty list
-                        shimmerLayout.visibility=View.GONE
+                        shimmerLayout.visibility = View.GONE
                         shimmerLayout.stopShimmer()
                     }
                 }
@@ -164,8 +158,8 @@ class AdoptedTreesActivity : AppCompatActivity() {
                             dialog.dismiss()
                         }
                         adopt.setOnClickListener {
-                            adopt.isEnabled=false
-                            adopt.text="adopting..."
+                            adopt.isEnabled = false
+                            adopt.text = "adopting..."
                             val first_tree = snapshot.children.elementAt(0)
 //                        move that tree's record from Registered_Trees to Adopted_Trees of given user.
                             val tree_node = first_tree.value
@@ -177,7 +171,12 @@ class AdoptedTreesActivity : AppCompatActivity() {
                             if (first_tree.hasChild(Last_watered_time))
                                 last_watered = first_tree.child(Last_watered_time).value as Long
                             val tree_data =
-                                TreeData(tree?.tree_nick_name!!, tree?.adopted_on!!, last_watered, first_tree.key!!)
+                                TreeData(
+                                    tree?.tree_nick_name!!,
+                                    tree?.adopted_on!!,
+                                    last_watered,
+                                    first_tree.key!!
+                                )
                             fdbref.child(Trees).child(Adopted_trees)
                                 .child(first_tree.key!!).setValue(tree_node)
                                 .addOnSuccessListener {
@@ -191,15 +190,15 @@ class AdoptedTreesActivity : AppCompatActivity() {
                                                         .child(first_tree.key!!)
                                                         .setValue(tree_data)
                                                         .addOnSuccessListener {
-                                                           adopt.text="done"
+                                                            adopt.text = "done"
                                                             if (adoptedTrees.size == 0) {
                                                                 recyclerView.visibility =
                                                                     View.VISIBLE
                                                                 shimmerLayout.visibility = View.GONE
                                                                 shimmerLayout.stopShimmer()
                                                             }
-                                                                adoptedTrees.add(0, tree_data)
-                                                                treeAdapter.notifyItemInserted(0)
+                                                            adoptedTrees.add(0, tree_data)
+                                                            treeAdapter.notifyItemInserted(0)
                                                             dialog.dismiss()
                                                             Toast.makeText(
                                                                 this@AdoptedTreesActivity,
@@ -223,6 +222,29 @@ class AdoptedTreesActivity : AppCompatActivity() {
 
                 override fun onCancelled(error: DatabaseError) {}
             })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.pop_up_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.signout_btn) {
+            FirebaseAuth.getInstance().signOut()
+            try {
+                GoogleSignIn.getClient(
+                    this, GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.my_web_client_ID))
+                        .requestEmail().build()
+                ).signOut()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
 

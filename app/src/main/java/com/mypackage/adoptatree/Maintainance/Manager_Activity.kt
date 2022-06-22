@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -13,6 +15,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.Toolbar
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.card.MaterialCardView
@@ -37,21 +41,9 @@ class Manager_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manager)
+        val toolbar: Toolbar = findViewById(R.id.mytoolbar)
+        setSupportActionBar(toolbar)
 
-        findViewById<Button>(R.id.btn_signout).setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            try {
-                GoogleSignIn.getClient(
-                    this, GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.my_web_client_ID))
-                        .requestEmail().build()
-                ).signOut()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
-        }
         mdbRef = FirebaseDatabase.getInstance().reference
         qr_verify_load = findViewById(R.id.qr_verify_load)
         main_linear_layout = findViewById(R.id.main_layout)
@@ -72,6 +64,7 @@ class Manager_Activity : AppCompatActivity() {
                 R.anim.animate_slide_left_enter,
                 R.anim.animate_slide_left_exit
             )
+//            delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
         }
         btn_register_tree.setOnClickListener {
             startActivity(Intent(this, Register_Tree::class.java))
@@ -222,5 +215,28 @@ class Manager_Activity : AppCompatActivity() {
                 return false
         }
         return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.pop_up_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.signout_btn) {
+            FirebaseAuth.getInstance().signOut()
+            try {
+                GoogleSignIn.getClient(
+                    this, GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.my_web_client_ID))
+                        .requestEmail().build()
+                ).signOut()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

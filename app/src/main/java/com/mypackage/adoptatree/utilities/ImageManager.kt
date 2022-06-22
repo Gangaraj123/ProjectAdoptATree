@@ -20,14 +20,14 @@ internal object ImageManager {
                     .addOnSuccessListener { uri ->
                         val downloadUrl = uri.toString()
                         Glide.with(view.context)
-                            .load(downloadUrl).placeholder(R.drawable.image_not_available)
+                            .load(downloadUrl).placeholder(R.drawable.img_loading)
                             .into(view)
                     }
                     .addOnFailureListener { e ->
                         Log.d(TAG, "Failed to load image")
                     }
             } else {
-                Glide.with(view.context).load(url).placeholder(R.drawable.image_not_available)
+                Glide.with(view.context).load(url).placeholder(R.drawable.img_loading)
                     .into(view)
             }
         } else {

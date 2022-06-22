@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender.SendIntentException
 import android.content.pm.PackageManager
+import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -58,6 +59,10 @@ class Register_Tree : AppCompatActivity() {
         result_success = findViewById(R.id.result_success)
         result_error = findViewById(R.id.result_error)
 
+        locationRequest = LocationRequest.create();
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY;
+        locationRequest.interval = 5000;
+        locationRequest.fastestInterval = 2000;
         getCurrentLocation()
 
         scan_btn.setOnClickListener {
@@ -115,12 +120,23 @@ class Register_Tree : AppCompatActivity() {
 
     private fun Add_tree_in_database(qr_value: String) {
         val geocoder = Geocoder(this, Locale.getDefault())
-        val location_addr =
-            geocoder.getFromLocation(current_location!!.latitude, current_location!!.longitude, 1)
-                .get(0)
+
+        var location_addr: Address? = null
+        try {
+            location_addr =
+                geocoder.getFromLocation(
+                    current_location!!.latitude,
+                    current_location!!.longitude,
+                    1
+                )
+                    .get(0)
+        } catch (e: Exception) {
+            Log.d(TAG, "Can't get location ")
+        }
         val tree_id = mdbRef.child(Trees).child(Registered_trees).push().key.toString()
         val new_tree = Tree(tree_id)
-        new_tree.location = Tree_Location(location_addr)
+        if (location_addr != null)
+            new_tree.location = Tree_Location(location_addr)
         mdbRef.child(Trees).child(Registered_trees).child(tree_id).child(Tree_details)
             .setValue(new_tree)
             .addOnSuccessListener {
@@ -172,10 +188,6 @@ class Register_Tree : AppCompatActivity() {
                 REQUEST_CODE_LOCATION
             )
         } else {
-            locationRequest = LocationRequest.create();
-            locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY;
-            locationRequest.interval = 5000;
-            locationRequest.fastestInterval = 2000;
             if (isGPSEnabled()) {
                 update_location()
             } else {
@@ -224,7 +236,7 @@ class Register_Tree : AppCompatActivity() {
             if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Location access is needed", Toast.LENGTH_SHORT).show()
                 finish()
-            } else if (resultCode == RESULT_OK) {
+            } else {
                 Log.d(TAG, "user turned on location")
                 update_location()
             }

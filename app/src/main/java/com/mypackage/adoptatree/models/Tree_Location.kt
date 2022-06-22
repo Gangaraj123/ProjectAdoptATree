@@ -10,6 +10,9 @@ class Tree_Location {
 
     constructor() {}
     constructor(location: Address) {
-
+        latitude = location.latitude
+        longitude = location.longitude
+        country = location.countryName
+        state = location.adminArea
     }
 }

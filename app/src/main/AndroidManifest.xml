@@ -27,11 +27,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AdoptATree"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
+
+        <activity
+            android:name=".User.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".Maintainance.Update.Update_Activity"
-            android:exported="false"
-            android:label="@string/title_activity_udate2"
-            android:theme="@style/Theme.AdoptATree.NoActionBar" />
+            android:configChanges="uiMode"
+            android:label="@string/title_activity_udate2" />
         <activity
             android:name=".User.Tree_Images_Activity"
             android:exported="false" />
@@ -54,8 +61,7 @@
         <activity
             android:name=".User.AdoptedTreesActivity"
             android:exported="true"
-            android:label="@string/title_activity_adopted_trees"
-            android:theme="@style/Theme.AdoptATree.NoActionBar"></activity>
+            android:label="@string/title_activity_adopted_trees" />
         <activity
             android:name=".Maintainance.Manager_Activity"
             android:exported="true" />
@@ -67,7 +73,8 @@
             android:exported="true" />
         <activity
             android:name=".SignInActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

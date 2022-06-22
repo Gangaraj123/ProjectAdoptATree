@@ -15,8 +15,9 @@ import com.google.firebase.database.ValueEventListener
 import com.mypackage.adoptatree.*
 import com.mypackage.adoptatree.models.Question
 
-private val mdbref=FirebaseDatabase.getInstance().reference
-class UAQ_gardener_Adapter(val questionList: ArrayList<Question>,val tree_id:String) :
+private val mdbref = FirebaseDatabase.getInstance().reference
+
+class UAQ_gardener_Adapter(val questionList: ArrayList<Question>, val tree_id: String) :
     RecyclerView.Adapter<UAQ_gardener_Adapter.UAQ_VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UAQ_VH {
@@ -29,8 +30,8 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>,val tree_id:Str
         holder.question_text.text = questionList[position].question
 
         //recycler view recycles the views, so if this views display is changed when used before, reset it
-        holder.curr_question=questionList[position]
-        holder.tree_id=tree_id
+        holder.curr_question = questionList[position]
+        holder.tree_id = tree_id
         if (holder.answer_edit_text.visibility == View.VISIBLE)
             holder.answer_edit_text.visibility = View.GONE
         holder.answer_edit_text.setText("")
@@ -51,8 +52,9 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>,val tree_id:Str
         var answer_edit_text: EditText
         var uaq_gardener_adapter: UAQ_gardener_Adapter? = null
         var question_text: TextView
-        var tree_id:String=""
-        var curr_question:Question?=null
+        var tree_id: String = ""
+        var curr_question: Question? = null
+
         init {
             respond_btn = itemView.findViewById(R.id.btn_add_answer)
             submit_btn = itemView.findViewById(R.id.btn_submit_answer)
@@ -70,7 +72,8 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>,val tree_id:Str
                     curr_question?.answer = answer_edit_text.text.toString()
                     curr_question?.answeredOn = System.currentTimeMillis()
                     submit_btn.text = "submitting..."
-                    val current_tree_reference = mdbref.child(Trees).child(Adopted_trees).child(tree_id)
+                    val current_tree_reference =
+                        mdbref.child(Trees).child(Adopted_trees).child(tree_id)
                     current_tree_reference.child(Tree_question_list_unanswered)
                         .child(curr_question?.askedOn.toString())
                         .removeValue().addOnSuccessListener {
@@ -79,7 +82,8 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>,val tree_id:Str
                                 .setValue(curr_question)
                                 .addOnSuccessListener {
                                     current_tree_reference.child(Unread_Question_count)
-                                        .addListenerForSingleValueEvent(object : ValueEventListener {
+                                        .addListenerForSingleValueEvent(object :
+                                            ValueEventListener {
                                             override fun onDataChange(snapshot: DataSnapshot) {
                                                 var count = 0L
                                                 if (snapshot.exists())

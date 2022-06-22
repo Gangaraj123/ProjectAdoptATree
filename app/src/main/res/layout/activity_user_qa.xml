@@ -11,18 +11,37 @@
         android:layout_height="wrap_content"
         android:theme="@style/Theme.AdoptATree.AppBarOverlay">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:minHeight="?actionBarSize"
-            android:padding="@dimen/appbar_padding"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/green_dark"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/back_btn"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="5dp"
+                android:background="?selectableItemBackground"
+                android:src="@drawable/ic_back_btn" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="5dp"
+                android:text="Tree Nick name"
+                android:id="@+id/tree_nick_name"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
+            app:tabIndicatorColor="@color/green_dark"
+            app:tabIndicatorHeight="5dp"
+            app:tabTextColor="@color/green_dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.appbar.AppBarLayout>
@@ -34,12 +53,12 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/add_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/green_2"
-        android:id="@+id/add_question"
-        android:text="ask"
         android:layout_gravity="bottom|end"
-        app:icon="@drawable/ic_baseline_ask_question_24"
-        android:layout_margin="20dp" />
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/green_2"
+        android:text="ask"
+        app:icon="@drawable/ic_baseline_ask_question_24" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
