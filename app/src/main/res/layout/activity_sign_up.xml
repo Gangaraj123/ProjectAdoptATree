@@ -7,10 +7,10 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
         android:id="@+id/main_signup_layout"
-        android:layout_height="match_parent"
-        android:background="@drawable/signup_screen">
+        android:layout_width="match_parent"
+        android:layout_height="821dp"
+        android:background="@drawable/signup">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameLayout"
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="285dp"
             app:boxStrokeColor="@color/yellow"
             app:hintTextColor="@color/yellow"
             app:layout_constraintEnd_toEndOf="parent"
@@ -110,9 +110,9 @@
             android:id="@+id/button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
             android:layout_margin="10dp"
-            android:background="@color/yellow"
+            android:layout_marginHorizontal="16dp"
+            android:background="@color/green_signin"
             android:text="Sign Up"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -125,9 +125,9 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Already Registered , Sign In !"
             android:textColor="@color/black"
-            android:layout_margin="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

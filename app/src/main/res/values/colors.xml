@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green_1">#33cc33</color>
     <color name="green_2">#00cc00</color>
+    <color name="green_signin">#32DA26</color>
     <color name="green_dark">#006600</color>
     <color name="green_action_bar">#4db34d</color>
     <color name="green_light">#00ff00</color>
