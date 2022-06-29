@@ -5,6 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:elevation="10dp"
+    android:id="@+id/parent_card_view_image"
+    android:transitionName="fade"
     app:cardCornerRadius="20dp">
 
     <RelativeLayout
