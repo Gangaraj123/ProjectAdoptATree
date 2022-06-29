@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.mypackage.adoptatree.R
 import com.mypackage.adoptatree.TAG
 import com.mypackage.adoptatree.User.AdoptedTreesActivity
@@ -29,7 +30,8 @@ class AdoptedTreeAdapter(private val adoptedTreeList: List<AdoptedTreesActivity.
         val lastWateredText: TextView = itemView.findViewById(R.id.lastWateredText)
         val imageButton: Button = itemView.findViewById(R.id.images)
         val questionButton: Button = itemView.findViewById(R.id.questions)
-        val locatebutton: ImageButton = itemView.findViewById(R.id.locate_tree)
+        val locatebutton: MaterialCardView = itemView.findViewById(R.id.locate_tree)
+        val btn_locate:ImageButton=itemView.findViewById(R.id.btn_locate_tree)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdoptedTreeViewHolder {
@@ -40,7 +42,7 @@ class AdoptedTreeAdapter(private val adoptedTreeList: List<AdoptedTreesActivity.
 
     override fun onBindViewHolder(holder: AdoptedTreeViewHolder, position: Int) {
         val adoptedTree = adoptedTreeList[position]
-
+        holder.btn_locate.isEnabled=false
         holder.nickname.text = adoptedTree.tree_nick_name
         holder.adoptedOn.text = convertTimeInMillisToString(adoptedTree.adopted_on)
 
