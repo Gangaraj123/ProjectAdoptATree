@@ -55,8 +55,8 @@ class Register_Tree : AppCompatActivity() {
         result_loading = findViewById(R.id.scan_result_loading)
         result_success = findViewById(R.id.result_success)
         result_error = findViewById(R.id.result_error)
-        val back_btn = findViewById<ImageButton>(R.id.back_btn)
-        back_btn.setOnClickListener {
+        val back_btn2 = findViewById<ImageButton>(R.id.back_btn)
+        back_btn2.setOnClickListener {
             onBackPressed()
         }
         locationRequest = LocationRequest.create();

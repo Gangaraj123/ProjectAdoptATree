@@ -67,7 +67,6 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>, val tree_id: S
                 respond_btn.visibility = View.GONE
             }
             submit_btn.setOnClickListener {
-                submit_btn.setOnClickListener {
                     answer_edit_text.isEnabled = false
                     curr_question?.answer = answer_edit_text.text.toString()
                     curr_question?.answeredOn = System.currentTimeMillis()
@@ -110,7 +109,7 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>, val tree_id: S
                         }
 
                 }
-            }
+
         }
 
         fun linkAdapter(adapter: UAQ_gardener_Adapter?): UAQ_VH {
