@@ -28,7 +28,7 @@ class Image_Adapter(
     class ImageViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.item_image)
         val image_date: TextView = view.findViewById(R.id.image_date)
-        val parent:MaterialCardView=view.findViewById(R.id.parent_card_view_image)
+        val parent: MaterialCardView = view.findViewById(R.id.parent_card_view_image)
     }
 
 
@@ -47,7 +47,7 @@ class Image_Adapter(
         holder.parent.setOnClickListener {
             // start imageviewer activity with transition
             holder.imageView.invalidate()
-            val bitmap=holder.imageView.drawable.toBitmap()
+            val bitmap = holder.imageView.drawable.toBitmap()
             val intent = Intent(it.context, ImageViewer::class.java)
             intent.putExtra("Image_bitmap", bitmap)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(

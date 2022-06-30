@@ -17,7 +17,7 @@ class ImageViewer : AppCompatActivity() {
         hideSystemBars()
         // setting transition
         val fade = Fade()
-          fade.excludeTarget(android.R.id.statusBarBackground, true);
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
         fade.excludeTarget(android.R.id.navigationBarBackground, true);
 
         window.enterTransition = fade

@@ -31,7 +31,7 @@ class AdoptedTreeAdapter(private val adoptedTreeList: List<AdoptedTreesActivity.
         val imageButton: Button = itemView.findViewById(R.id.images)
         val questionButton: Button = itemView.findViewById(R.id.questions)
         val locatebutton: MaterialCardView = itemView.findViewById(R.id.locate_tree)
-        val btn_locate:ImageButton=itemView.findViewById(R.id.btn_locate_tree)
+        val btn_locate: ImageButton = itemView.findViewById(R.id.btn_locate_tree)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdoptedTreeViewHolder {
@@ -42,7 +42,7 @@ class AdoptedTreeAdapter(private val adoptedTreeList: List<AdoptedTreesActivity.
 
     override fun onBindViewHolder(holder: AdoptedTreeViewHolder, position: Int) {
         val adoptedTree = adoptedTreeList[position]
-        holder.btn_locate.isEnabled=false
+        holder.btn_locate.isEnabled = false
         holder.nickname.text = adoptedTree.tree_nick_name
         holder.adoptedOn.text = convertTimeInMillisToString(adoptedTree.adopted_on)
 

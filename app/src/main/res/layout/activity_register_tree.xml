@@ -8,6 +8,33 @@
     tools:context=".Maintainance.Register_Tree">
 
     <LinearLayout
+        android:id="@+id/linlayout1"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/green_dark"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/back_btn"
+            android:layout_marginHorizontal="5dp"
+            android:background="?selectableItemBackground"
+            android:src="@drawable/ic_back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
+            android:id="@+id/tree_nick_name"
+            android:text="Register Tree"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/before_scan_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

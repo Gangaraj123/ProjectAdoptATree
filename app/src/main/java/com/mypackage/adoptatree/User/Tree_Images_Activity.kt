@@ -50,7 +50,7 @@ class Tree_Images_Activity : AppCompatActivity() {
         imageRecyclerView.adapter = image_RV_Adapter
         mdbRef = FirebaseDatabase.getInstance().reference
         parent_scroll_view = findViewById(R.id.parent_scroll_view)
-        val fade=Fade()
+        val fade = Fade()
 
         fade.excludeTarget(android.R.id.statusBarBackground, true);
         fade.excludeTarget(android.R.id.navigationBarBackground, true);

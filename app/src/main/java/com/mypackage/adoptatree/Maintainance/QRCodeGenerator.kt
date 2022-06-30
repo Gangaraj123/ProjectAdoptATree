@@ -48,7 +48,10 @@ class QRCodeGenerator : AppCompatActivity() {
         share_btn = findViewById(R.id.qr_share_btn)
         save_btn = findViewById(R.id.qr_save_btn)
         qr_select_radio_grp = findViewById(R.id.radio_grp)
-
+        val backbtn = findViewById<ImageButton>(R.id.back_btn)
+        backbtn.setOnClickListener {
+            onBackPressed()
+        }
         generate_btn.setOnClickListener {
             val qr_string = getRandomKey()
             val selectedbtn = qr_select_radio_grp.checkedRadioButtonId

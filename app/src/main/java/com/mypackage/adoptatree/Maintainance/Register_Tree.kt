@@ -15,10 +15,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -58,7 +55,10 @@ class Register_Tree : AppCompatActivity() {
         result_loading = findViewById(R.id.scan_result_loading)
         result_success = findViewById(R.id.result_success)
         result_error = findViewById(R.id.result_error)
-
+        val back_btn = findViewById<ImageButton>(R.id.back_btn)
+        back_btn.setOnClickListener {
+            onBackPressed()
+        }
         locationRequest = LocationRequest.create();
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY;
         locationRequest.interval = 5000;
