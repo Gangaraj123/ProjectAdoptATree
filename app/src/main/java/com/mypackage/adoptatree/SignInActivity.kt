@@ -42,7 +42,9 @@ class SignInActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         if (mAuth.uid != null) {
-            if (mAuth.currentUser?.email.toString() == "202001107@daiict.ac.in")
+            if (mAuth.currentUser?.email.toString() == "202001107@daiict.ac.in"
+                || mAuth.currentUser?.email.toString() == "neelporiya1309@gmail.com"
+            )
                 startActivity(Intent(this, Manager_Activity::class.java))
             else
                 startActivity(Intent(this, AdoptedTreesActivity::class.java))
@@ -137,8 +139,11 @@ class SignInActivity : AppCompatActivity() {
                     val user = mAuth.currentUser
                     if (user != null) {
                         addToDatabase(user.displayName!!, user.email!!, user.uid, false)
+                        Log.d(TAG, mAuth.currentUser?.email.toString())
                         ImageManager.updateTokenInFirebase() // used for notifications
-                        if (mAuth.currentUser?.email.toString() == "202001107@daiict.ac.in")
+                        if (mAuth.currentUser?.email.toString() == "202001107@daiict.ac.in"
+                            || mAuth.currentUser?.email.toString() == "neelporiya1309@gmail.com"
+                        )
                             startActivity(Intent(this, Manager_Activity::class.java))
                         else
                             startActivity(Intent(this, AdoptedTreesActivity::class.java))

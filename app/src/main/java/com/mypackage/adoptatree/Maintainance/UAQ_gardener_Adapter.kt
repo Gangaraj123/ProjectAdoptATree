@@ -67,48 +67,48 @@ class UAQ_gardener_Adapter(val questionList: ArrayList<Question>, val tree_id: S
                 respond_btn.visibility = View.GONE
             }
             submit_btn.setOnClickListener {
-                    answer_edit_text.isEnabled = false
-                    curr_question?.answer = answer_edit_text.text.toString()
-                    curr_question?.answeredOn = System.currentTimeMillis()
-                    submit_btn.text = "submitting..."
-                    val current_tree_reference =
-                        mdbref.child(Trees).child(Adopted_trees).child(tree_id)
-                    current_tree_reference.child(Tree_question_list_unanswered)
-                        .child(curr_question?.askedOn.toString())
-                        .removeValue().addOnSuccessListener {
-                            current_tree_reference.child(Tree_question_list_answered)
-                                .child(curr_question?.answeredOn.toString())
-                                .setValue(curr_question)
-                                .addOnSuccessListener {
-                                    current_tree_reference.child(Unread_Question_count)
-                                        .addListenerForSingleValueEvent(object :
-                                            ValueEventListener {
-                                            override fun onDataChange(snapshot: DataSnapshot) {
-                                                var count = 0L
-                                                if (snapshot.exists())
-                                                    count = snapshot.value as Long
-                                                Log.d(TAG, "current count = " + count)
-                                                snapshot.ref.setValue(count + 1)
-                                            }
+                answer_edit_text.isEnabled = false
+                curr_question?.answer = answer_edit_text.text.toString()
+                curr_question?.answeredOn = System.currentTimeMillis()
+                submit_btn.text = "submitting..."
+                val current_tree_reference =
+                    mdbref.child(Trees).child(Adopted_trees).child(tree_id)
+                current_tree_reference.child(Tree_question_list_unanswered)
+                    .child(curr_question?.askedOn.toString())
+                    .removeValue().addOnSuccessListener {
+                        current_tree_reference.child(Tree_question_list_answered)
+                            .child(curr_question?.answeredOn.toString())
+                            .setValue(curr_question)
+                            .addOnSuccessListener {
+                                current_tree_reference.child(Unread_Question_count)
+                                    .addListenerForSingleValueEvent(object :
+                                        ValueEventListener {
+                                        override fun onDataChange(snapshot: DataSnapshot) {
+                                            var count = 0L
+                                            if (snapshot.exists())
+                                                count = snapshot.value as Long
+                                            Log.d(TAG, "current count = " + count)
+                                            snapshot.ref.setValue(count + 1)
+                                        }
 
-                                            override fun onCancelled(error: DatabaseError) {}
-                                        })
-                                    submit_btn.text = "Done"
-                                    // remove it from list
-                                    Log.d(
-                                        TAG,
-                                        "current list size = " + uaq_gardener_adapter?.questionList?.size
-                                    )
-                                    try {
-                                        uaq_gardener_adapter?.questionList?.removeAt(adapterPosition)
-                                        uaq_gardener_adapter?.notifyItemRemoved(adapterPosition)
-                                    } catch (e: Exception) {
-                                        Log.d(TAG, "Error occured while removing from adapter")
-                                    }
+                                        override fun onCancelled(error: DatabaseError) {}
+                                    })
+                                submit_btn.text = "Done"
+                                // remove it from list
+                                Log.d(
+                                    TAG,
+                                    "current list size = " + uaq_gardener_adapter?.questionList?.size
+                                )
+                                try {
+                                    uaq_gardener_adapter?.questionList?.removeAt(adapterPosition)
+                                    uaq_gardener_adapter?.notifyItemRemoved(adapterPosition)
+                                } catch (e: Exception) {
+                                    Log.d(TAG, "Error occured while removing from adapter")
                                 }
-                        }
+                            }
+                    }
 
-                }
+            }
 
         }
 
